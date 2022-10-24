@@ -14,10 +14,10 @@ public class SpawnManager : MonoBehaviour
     #region Serialized Fields
 
     [SerializeField] private GameObject _hexagonPrefab;
-    [SerializeField][Range(0.1f, 10.0f)] private float _spawnRate = 1.0f;
+    [SerializeField][Range(0.1f, 10.0f)] private float _spawnRate = 0.8f;
 
     [SerializeField] private int _currentHexagonAmount = 0;
-    [SerializeField] private int _maxHexagonAmount = 3;
+    [SerializeField] private int _maxHexagonAmount = 4;
 
     #endregion
 

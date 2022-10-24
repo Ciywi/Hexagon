@@ -30,7 +30,7 @@ public class Hexagon : MonoBehaviour
     [Header("Resize Settings")]
     #region Serialized Field
 
-    [SerializeField] private float _resizeDelay = 0f;
+    [SerializeField] private float _resizeDelay = 0.2f;
 
     #endregion
 
@@ -67,7 +67,8 @@ public class Hexagon : MonoBehaviour
             StartCoroutine("ResizerAndRotater");
             _hexagonLineRenderer.enabled = false;
             _resized = false;
-            _resizeDelay += 0.1f;
+            ShrinkSpeedUp(0.01f);
+            Debug.Log($"Shrink Speed is {_shrinkSpeed}");
         }
     }
 
@@ -99,5 +100,9 @@ public class Hexagon : MonoBehaviour
         int i = Random.Range(0, _rotations.Length - 1);
 
         _hexagonRigidbody.rotation = _rotations[i];
+    }
+    void ShrinkSpeedUp(float speedUp)
+    {
+        _shrinkSpeed += speedUp;
     }
 }
