@@ -9,6 +9,7 @@ public class PointManager : MonoBehaviour
     public static PointManager Instance;
 
     #endregion
+
     [Header("Point Settings")]
     #region Serialized Fields
 

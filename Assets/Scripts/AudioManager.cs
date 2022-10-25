@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 [ExecuteInEditMode]
 public class AudioManager : MonoBehaviour
 {
+    #region Instance
+
     public static AudioManager Instance;
 
-    private AudioSource _backgroundAudio;
+    #endregion
 
-    [Header("Pitch Settings")]
+    [Header("Audio Components")]
     #region Serialized Fields
 
-    [SerializeField][Range(0, 1)] private float _startValue = 1.0f;
-    [SerializeField][Range(0, 1)] private float _endValue = 0.7f;
-    [SerializeField][Range(0, 1)] private float _speed = 0.1f;
+    [SerializeField] private Sounds[] _sounds;
 
     #endregion
 
@@ -25,12 +26,19 @@ public class AudioManager : MonoBehaviour
             Instance = this;
         }
 
-        _backgroundAudio = GetComponent<AudioSource>();
-        
+        foreach (Sounds sound in _sounds)
+        {
+            sound.SoundSource = gameObject.AddComponent<AudioSource>();
+
+            sound.SoundSource.clip = sound.Clip;
+            sound.SoundSource.volume = sound.Volume;
+            sound.SoundSource.pitch = sound.Pitch;
+        }
     }
-    public void LowerAudioPitch()
+
+    public void LowerAudioPitch(int audioIndex, float startValue, float endValue, float speed)
     {
-        _backgroundAudio.pitch = Mathf.MoveTowards(_startValue, _endValue, _speed * Time.unscaledTime);
+        _sounds[audioIndex].Pitch = Mathf.MoveTowards(startValue, endValue, speed * Time.unscaledTime);
     }
 
 }

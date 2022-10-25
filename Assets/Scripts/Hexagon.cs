@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Hexagon : MonoBehaviour
 {
-    [Header("Instance")]
+    #region Instance
+
     public static Hexagon Instance;
 
+    #endregion
 
     [Header("Components")]
     #region Serialized Fields

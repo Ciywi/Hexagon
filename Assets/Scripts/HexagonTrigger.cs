@@ -19,7 +19,7 @@ public class HexagonTrigger : MonoBehaviour
     IEnumerator GameOver()
     {
         Time.timeScale = 0.3f;
-        AudioManager.Instance.LowerAudioPitch();
+        AudioManager.Instance.LowerAudioPitch(0, 1.0f, 0.7f, 0.1f);
 
         yield return new WaitForSecondsRealtime(1.0f);
 
