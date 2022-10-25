@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c393e98b4e6094e4a9ba9a46b164165d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _centerHexagon: {fileID: 0}
   _startingSize: 15
   _shrinkSpeed: 5
   _resizeDelay: 0.2

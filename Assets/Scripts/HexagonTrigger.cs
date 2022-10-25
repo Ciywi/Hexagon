@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class HexagonTrigger : MonoBehaviour
 {
-    //[SerializeField] private AudioSource _backgroundAudio;
+    private Color _red = Color.red;
+    private Color _white = Color.white;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            HexagonColorChangerOnHit(_red);
             StartCoroutine("GameOver");
         }
     }
@@ -19,11 +21,19 @@ public class HexagonTrigger : MonoBehaviour
         Time.timeScale = 0.3f;
         AudioManager.Instance.LowerAudioPitch();
 
-        //_backgroundAudio.pitch = Mathf.Lerp(1.0f, 0.7f, 0.1f);
+        yield return new WaitForSecondsRealtime(1.0f);
 
-        yield return new WaitForSecondsRealtime(3f);
+        HexagonColorChangerOnHit(_white);
+
+        yield return new WaitForSecondsRealtime(2.0f);
 
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
+    }
+
+    void HexagonColorChangerOnHit(Color colorToBe)
+    {
+        Hexagon.Instance.HexagonLineRenderer.startColor = colorToBe;
+        Hexagon.Instance.HexagonLineRenderer.endColor = colorToBe;
     }
 }

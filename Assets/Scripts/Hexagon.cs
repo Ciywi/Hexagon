@@ -4,11 +4,27 @@ using UnityEngine;
 
 public class Hexagon : MonoBehaviour
 {
+    [Header("Instance")]
+    public static Hexagon Instance;
+
+
     [Header("Components")]
+    #region Serialized Fields
+
+    [SerializeField] private GameObject _centerHexagon;
+
+    #endregion
+
     #region Private Fields
 
     private Rigidbody2D _hexagonRigidbody;
     private LineRenderer _hexagonLineRenderer;
+
+    #endregion
+
+    #region Properties
+
+    public LineRenderer HexagonLineRenderer { get { return _hexagonLineRenderer; } set { _hexagonLineRenderer = value; } }
 
     #endregion
 
@@ -43,6 +59,11 @@ public class Hexagon : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+
         _hexagonRigidbody = GetComponent<Rigidbody2D>();
         _hexagonLineRenderer = GetComponent<LineRenderer>();
     }
