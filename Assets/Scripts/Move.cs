@@ -8,7 +8,6 @@ public class Move : MonoBehaviour
     #region Serialize Field
 
     [SerializeField][Range(1.0f,750.0f)] private float _moveSpeed = 500.0f;
-    [SerializeField] private GameObject _centerHexagon;
 
     #endregion
 
@@ -17,11 +16,6 @@ public class Move : MonoBehaviour
     private float _xInput;
 
     #endregion
-
-    private void Start()
-    {
-        _centerHexagon= GameObject.Find("Center Hexagon");
-    }
     void Update()
     {
         GetInput();
@@ -29,7 +23,7 @@ public class Move : MonoBehaviour
 
     private void FixedUpdate()
     {
-        RotateAroundObject(_centerHexagon, _xInput, _moveSpeed);
+        RotateAroundObject(GameManager.Instance.CenterHexagon, _xInput, _moveSpeed);
     }
 
     private void GetInput()

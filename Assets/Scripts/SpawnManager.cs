@@ -14,6 +14,7 @@ public class SpawnManager : MonoBehaviour
     #region Serialized Fields
 
     [SerializeField] private GameObject _hexagonPrefab;
+
     [SerializeField][Range(0.1f, 10.0f)] private float _spawnRate = 0.8f;
 
     [SerializeField] private int _currentHexagonAmount = 0;
@@ -50,8 +51,10 @@ public class SpawnManager : MonoBehaviour
         if (_currentHexagonAmount < _maxHexagonAmount && Time.time >= _nextSpawnTime)
         {
             Instantiate(_hexagonPrefab, Vector3.zero, Quaternion.identity);
+
             _nextSpawnTime = Time.time + _spawnRate;
             _currentHexagonAmount++;
+
         }
         else if (_currentHexagonAmount == _maxHexagonAmount)
         {

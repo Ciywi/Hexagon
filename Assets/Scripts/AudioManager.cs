@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using System;
 
-[ExecuteInEditMode]
 public class AudioManager : MonoBehaviour
 {
     #region Instance
@@ -36,9 +36,28 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void LowerAudioPitch(int audioIndex, float startValue, float endValue, float speed)
+    private void Start()
     {
-        _sounds[audioIndex].Pitch = Mathf.MoveTowards(startValue, endValue, speed * Time.unscaledTime);
+        PlayAudio("Background Audio");
+    }
+
+    public void PlayAudio(string name)
+    {
+        Sounds audio = Array.Find(_sounds, sound => sound.Name == name);
+
+        if (audio == null)
+        {
+            Debug.Log($"There is no audio named '{name}'");
+            return;
+        }
+
+        audio.SoundSource.Play();
+    }
+
+    public void LowerAudioPitch(string name, float startValue, float endValue, float speed)
+    {
+        Sounds audio = Array.Find(_sounds, sound => sound.Name == name);
+        audio.SoundSource.pitch = Mathf.MoveTowards(startValue, endValue, speed * Time.unscaledTime);
     }
 
 }

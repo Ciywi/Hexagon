@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Hexagon : MonoBehaviour
 {
@@ -10,10 +11,10 @@ public class Hexagon : MonoBehaviour
 
     #endregion
 
-    [Header("Components")]
-    #region Serialized Fields
+    [Header("Trigger Settings")]
+    #region Private Fields
 
-    [SerializeField] private GameObject _centerHexagon;
+    private Color _red = Color.red;
 
     #endregion
 
@@ -87,6 +88,7 @@ public class Hexagon : MonoBehaviour
 
         if (transform.localScale.x <= 0.5f && _resized == true)
         {
+            AnimationManager.Instance.CenterHexagonAnimation(GameManager.Instance.CenterHexagon);
             StartCoroutine("ResizerAndRotater");
             _hexagonLineRenderer.enabled = false;
             _resized = false;
@@ -127,5 +129,24 @@ public class Hexagon : MonoBehaviour
     void ShrinkSpeedUp(float speedUp)
     {
         _shrinkSpeed += speedUp;
+    }
+
+
+
+    public void HexagonColorChangerOnHit(Color colorToBe)
+    {
+        _hexagonLineRenderer.startColor = colorToBe;
+        _hexagonLineRenderer.endColor = colorToBe;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            AudioManager.Instance.PlayAudio("Hexagon Hit Sound Effect");
+            HexagonColorChangerOnHit(_red);
+            AudioManager.Instance.LowerAudioPitch("Background Audio", 1.0f, 0.85f, 0.05f);
+            StartCoroutine(GameManager.Instance.GameOver());
+        }
     }
 }
