@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using System;
+using DG.Tweening;
 
 public class AudioManager : MonoBehaviour
 {
@@ -24,14 +25,13 @@ public class AudioManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
             return;
         }
-
-        DontDestroyOnLoad(gameObject);
 
         foreach (Sounds sound in _sounds)
         {
@@ -65,6 +65,20 @@ public class AudioManager : MonoBehaviour
     {
         Sounds audio = Array.Find(_sounds, sound => sound.Name == name);
         audio.SoundSource.pitch = Mathf.MoveTowards(startValue, endValue, speed * Time.unscaledTime);
+    }
+
+    public void StopAudio(string name)
+    {
+        Sounds audio = Array.Find(_sounds, sound => sound.Name == name);
+        audio.SoundSource.Stop();
+    }
+
+    public void RestartAudio(string name)
+    {
+        Sounds audio = Array.Find(_sounds, sound => sound.Name == name);
+        audio.SoundSource.Stop();
+        audio.SoundSource.pitch = 1;
+        audio.SoundSource.Play();
     }
 
 }

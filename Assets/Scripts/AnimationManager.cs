@@ -25,13 +25,6 @@ public class AnimationManager : MonoBehaviour
         {
             Instance = this;
         }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);
     }
 
     public void CenterHexagonAnimation(GameObject gameobject)

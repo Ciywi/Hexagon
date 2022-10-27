@@ -12,20 +12,6 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    [Header("Components")]
-    #region Private Fields
-
-    private GameObject _centerHexagon;
-
-    #endregion
-
-    #region Properties
-
-    public GameObject CenterHexagon { get { return _centerHexagon; } set { _centerHexagon = value; } }
-
-    #endregion
-
-
     [Header("Color Variables")]
     #region Private Fields
 
@@ -38,6 +24,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -45,9 +32,13 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        DontDestroyOnLoad(gameObject);
 
-        _centerHexagon = GameObject.Find("Center Hexagon");
+    }
+
+    public void PlayButton()
+    {
+        StartCoroutine("StartGameCoroutine");
+        AudioManager.Instance.StopAudio("Menu Music");
     }
 
     public IEnumerator GameOver()
@@ -61,12 +52,16 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1.5f);
 
         Time.timeScale = 1f;
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
+        AudioManager.Instance.RestartAudio("Game Music");
+
     }
 
-    public void PlayButton()
+    public IEnumerator StartGameCoroutine()
     {
+        yield return new WaitForSeconds(0.2f);
         SceneManager.LoadScene(1);
         AudioManager.Instance.PlayAudio("Game Music");
     }
+
 }

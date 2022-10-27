@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Managers;
 
 public class Hexagon : MonoBehaviour
 {
@@ -88,7 +89,7 @@ public class Hexagon : MonoBehaviour
 
         if (transform.localScale.x <= 0.5f && _resized == true)
         {
-            AnimationManager.Instance.CenterHexagonAnimation(GameManager.Instance.CenterHexagon);
+            AnimationManager.Instance.CenterHexagonAnimation(ReferenceManager.Instance.CenterHexagon);
             StartCoroutine("ResizerAndRotater");
             _hexagonLineRenderer.enabled = false;
             _resized = false;
@@ -97,17 +98,7 @@ public class Hexagon : MonoBehaviour
         }
     }
 
-    IEnumerator ResizerAndRotater()
-    {
-        yield return new WaitForSeconds(_resizeDelay);
-
-        transform.localScale = Vector3.one * _startingSize;
-        RotationRandomizer();
-        _hexagonLineRenderer.enabled = true;
-        _resized = true;
-        Debug.Log($"Hexagon Rotation is: {_hexagonRigidbody.rotation}");
-    }
-
+    #region Private Methods
 
     void SetRotations()
     {
@@ -126,12 +117,11 @@ public class Hexagon : MonoBehaviour
 
         _hexagonRigidbody.rotation = _rotations[i];
     }
+
     void ShrinkSpeedUp(float speedUp)
     {
         _shrinkSpeed += speedUp;
     }
-
-
 
     public void HexagonColorChangerOnHit(Color colorToBe)
     {
@@ -139,14 +129,36 @@ public class Hexagon : MonoBehaviour
         _hexagonLineRenderer.endColor = colorToBe;
     }
 
+    #endregion
+
+    #region Coroutines
+
+    IEnumerator ResizerAndRotater()
+    {
+        yield return new WaitForSeconds(_resizeDelay);
+
+        transform.localScale = Vector3.one * _startingSize;
+        RotationRandomizer();
+        _hexagonLineRenderer.enabled = true;
+        _resized = true;
+        Debug.Log($"Hexagon Rotation is: {_hexagonRigidbody.rotation}");
+    }
+
+    #endregion
+
+
+    #region Triggers
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             AudioManager.Instance.PlayAudio("Hexagon Hit Sound Effect");
             HexagonColorChangerOnHit(_red);
-            AudioManager.Instance.LowerAudioPitch("Background Audio", 1.0f, 0.85f, 0.05f);
+            AudioManager.Instance.LowerAudioPitch("Game Music", 1.0f, 0.85f, 0.05f);
             StartCoroutine(GameManager.Instance.GameOver());
         }
     }
+
+    #endregion
 }

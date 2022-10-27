@@ -1,3 +1,4 @@
+using Managers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +24,7 @@ public class Move : MonoBehaviour
 
     private void FixedUpdate()
     {
-        RotateAroundObject(GameManager.Instance.CenterHexagon, _xInput, _moveSpeed);
+        RotateAroundObject(ReferenceManager.Instance.CenterHexagon, _xInput, _moveSpeed);
     }
 
     private void GetInput()

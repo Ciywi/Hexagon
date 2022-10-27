@@ -351,12 +351,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 208.1
+  m_fontSize: 200
   m_fontSizeBase: 228.24072
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 50
-  m_fontSizeMax: 500
+  m_fontSizeMin: 12.838543
+  m_fontSizeMax: 200
   m_fontStyle: 2
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -436,7 +436,7 @@ MonoBehaviour:
   fontSizerFallback:
     screenConfigName: 
     OptimizedSize: 500
-    MinSize: 500
+    MinSize: 200
     MaxSize: 500
     Mod:
       ExponentialScale: 1
@@ -454,7 +454,7 @@ MonoBehaviour:
       ExponentialScale: 1
       SizeModifiers:
       - Mode: 0
-        Impact: 0
+        Impact: 1
   customMinFontSizers:
     items: []
   maxFontSizerFallback:
@@ -815,7 +815,7 @@ GameObject:
   - component: {fileID: 893756902}
   - component: {fileID: 893756901}
   m_Layer: 5
-  m_Name: Play (1)
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1693,7 +1693,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1471284522}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1472277308}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   betterTransitions:
   - mode: 8
     stateNames:
@@ -1972,8 +1984,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1843241874}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1472277308
 MonoBehaviour:
@@ -2172,39 +2184,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1843241873
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1843241874}
-  m_Layer: 0
-  m_Name: Managers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1843241874
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1843241873}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1472277307}
-  - {fileID: 2140971842}
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1901810349
 GameObject:
   m_ObjectHideFlags: 0
@@ -2236,7 +2215,7 @@ Transform:
   - {fileID: 1599716436}
   - {fileID: 173050018}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2140971841
 GameObject:
@@ -2267,8 +2246,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1843241874}
-  m_RootOrder: 1
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2140971843
 MonoBehaviour:
@@ -2284,8 +2263,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sounds:
   - _name: Menu Music
-    _clip: {fileID: 8300000, guid: f5219453258f2984b88765da899d7f36, type: 3}
-    _volume: 0
+    _clip: {fileID: 8300000, guid: 283e202519115c849b960e6308a13a21, type: 3}
+    _volume: 0.6
     _pitch: 1
     _loop: 1
   - _name: Hexagon Hit Sound Effect
