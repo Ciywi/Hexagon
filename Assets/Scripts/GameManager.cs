@@ -12,6 +12,13 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    [Header("Game Variables")]
+    #region Private Fields
+
+    private float _startGameDelay = 0.2f;
+
+    #endregion
+
     [Header("Color Variables")]
     #region Private Fields
 
@@ -31,13 +38,17 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+    }
 
-
+    private void StartGame()
+    {
+        SceneManager.LoadScene(1);
+        AudioManager.Instance.PlayAudio("Game Music");
     }
 
     public void PlayButton()
     {
-        StartCoroutine("StartGameCoroutine");
+        Invoke(nameof(StartGame), _startGameDelay);
         AudioManager.Instance.StopAudio("Menu Music");
     }
 
@@ -55,13 +66,6 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(1);
         AudioManager.Instance.RestartAudio("Game Music");
 
-    }
-
-    public IEnumerator StartGameCoroutine()
-    {
-        yield return new WaitForSeconds(0.2f);
-        SceneManager.LoadScene(1);
-        AudioManager.Instance.PlayAudio("Game Music");
     }
 
 }
