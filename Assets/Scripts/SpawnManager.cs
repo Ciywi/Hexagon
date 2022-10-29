@@ -10,6 +10,8 @@ public class SpawnManager : MonoBehaviour
 
     #endregion
 
+    #region Fields
+
     [Header("Hexagon Spawner Settings")]
     #region Serialized Fields
 
@@ -33,6 +35,9 @@ public class SpawnManager : MonoBehaviour
     public float SpawnRate { get { return _spawnRate; } set { _spawnRate = value; } }
 
     #endregion
+
+    #endregion
+
 
     private void Awake()
     {

@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
+    #region Fields
+
     [Header("Components")]
     #region Serialized Fields
 
@@ -63,6 +65,8 @@ public class TimeManager : MonoBehaviour
 
     #endregion
 
+
+    #endregion
 
     #region Start
 

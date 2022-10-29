@@ -13,12 +13,17 @@ public class AudioManager : MonoBehaviour
 
     #endregion
 
+    #region Fields
+
     [Header("Audio Components")]
     #region Serialized Fields
 
     [SerializeField] private Sounds[] _sounds;
 
     #endregion
+
+    #endregion
+
 
     private void Awake()
     {

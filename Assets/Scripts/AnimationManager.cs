@@ -10,7 +10,10 @@ public class AnimationManager : MonoBehaviour
     public static AnimationManager Instance;
 
     #endregion
-    [Header("Center Hexagon Animation Settings")]
+
+    #region Fields
+
+    [Header("Scale Up And Down Animation Settings")]
     #region Serialized Fields
 
     [SerializeField][Range(0.1f, 1.5f)] private float _endScale;
@@ -18,6 +21,9 @@ public class AnimationManager : MonoBehaviour
     [SerializeField][Range(2, 10)] private int _animationLoopAmount;
 
     #endregion
+
+    #endregion
+
 
     private void Awake()
     {
@@ -27,7 +33,7 @@ public class AnimationManager : MonoBehaviour
         }
     }
 
-    public void CenterHexagonAnimation(GameObject gameobject)
+    public void ScaleUpAndDownAnimation(GameObject gameobject)
     {
         gameobject.transform.DOScale(_endScale, _animatonDuration).SetLoops(_animationLoopAmount, LoopType.Yoyo);
     }

@@ -12,7 +12,9 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    [Header("Game Variables")]
+    #region Fields
+
+    [Header("Game Settings")]
     #region Private Fields
 
     private float _startGameDelay = 0.2f;
@@ -25,6 +27,9 @@ public class GameManager : MonoBehaviour
     private Color _white = Color.white;
 
     #endregion
+
+    #endregion
+
 
     private void Awake()
     {

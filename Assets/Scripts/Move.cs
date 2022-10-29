@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
+    #region Fields
+
     [Header("Movement Settings")]
     #region Serialize Field
 
@@ -17,6 +19,10 @@ public class Move : MonoBehaviour
     private float _xInput;
 
     #endregion
+
+    #endregion
+
+
     void Update()
     {
         GetInput();

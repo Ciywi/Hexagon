@@ -14,6 +14,8 @@ namespace Managers
 
         #endregion
 
+        #region Fields
+
         [Header("Components")]
         #region Private Fields
 
@@ -45,6 +47,8 @@ namespace Managers
 
             _centerHexagon = GameObject.Find("Center Hexagon");
         }
+
+        #endregion
 
         #endregion
     }
