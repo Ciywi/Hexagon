@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour
 
     #endregion
 
+    #region Awake and Start
 
     private void Awake()
     {
@@ -52,6 +53,10 @@ public class AudioManager : MonoBehaviour
     {
         PlayAudio("Menu Music");
     }
+
+    #endregion
+
+    #region Public Methods
 
     public void PlayAudio(string name)
     {
@@ -86,4 +91,5 @@ public class AudioManager : MonoBehaviour
         audio.SoundSource.Play();
     }
 
+    #endregion
 }

@@ -89,7 +89,7 @@ public class Hexagon : MonoBehaviour
 
         if (transform.localScale.x <= 0.5f && _resized == true)
         {
-            AnimationManager.Instance.CenterHexagonAnimation(ReferenceManager.Instance.CenterHexagon);
+            AnimationManager.Instance.ScaleUpAndDownAnimation(ReferenceManager.Instance.CenterHexagon);
             StartCoroutine("ResizerAndRotater");
             _hexagonLineRenderer.enabled = false;
             _resized = false;
