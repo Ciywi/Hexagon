@@ -57,6 +57,11 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.StopAudio("Menu Music");
     }
 
+    public void ActivateOrDisablePanel(bool activate)
+    {
+
+    }
+
     public IEnumerator GameOver()
     {
         Time.timeScale = 0.2f;

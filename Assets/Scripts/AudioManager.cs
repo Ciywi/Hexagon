@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.Audio;
 using System;
 using DG.Tweening;
+using UnityEngine.UIElements;
+using TheraBytes.BetterUi;
+using static UnityEngine.Rendering.DebugUI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -19,6 +22,14 @@ public class AudioManager : MonoBehaviour
     #region Serialized Fields
 
     [SerializeField] private Sounds[] _sounds;
+    [SerializeField] private AudioSettings[] _audioSettings;
+
+    #endregion
+    [Header("Audio Settings")]
+
+    #region Private Fields
+
+    private BetterSlider _slider;
 
     #endregion
 
@@ -46,6 +57,7 @@ public class AudioManager : MonoBehaviour
             sound.SoundSource.clip = sound.Clip;
             sound.SoundSource.volume = sound.Volume;
             sound.SoundSource.pitch = sound.Pitch;
+            sound.SoundSource.outputAudioMixerGroup = sound.MixerGroup;
         }
     }
 
@@ -71,25 +83,34 @@ public class AudioManager : MonoBehaviour
         audio.SoundSource.Play();
     }
 
-    public void LowerAudioPitch(string name, float startValue, float endValue, float speed)
+    public void LowerAudioPitch(string audioName, float startValue, float endValue, float speed)
     {
-        Sounds audio = Array.Find(_sounds, sound => sound.Name == name);
+        Sounds audio = Array.Find(_sounds, sound => sound.Name == audioName);
         audio.SoundSource.pitch = Mathf.MoveTowards(startValue, endValue, speed * Time.unscaledTime);
     }
 
-    public void StopAudio(string name)
+    public void StopAudio(string audioName)
     {
-        Sounds audio = Array.Find(_sounds, sound => sound.Name == name);
+        Sounds audio = Array.Find(_sounds, sound => sound.Name == audioName);
         audio.SoundSource.Stop();
     }
 
-    public void RestartAudio(string name)
+    public void RestartAudio(string audioName)
     {
-        Sounds audio = Array.Find(_sounds, sound => sound.Name == name);
+        Sounds audio = Array.Find(_sounds, sound => sound.Name == audioName);
         audio.SoundSource.Stop();
         audio.SoundSource.pitch = 1;
         audio.SoundSource.Play();
     }
+
+    public void SetVolume(string mixerName)
+    {
+        AudioSettings audioSettings = Array.Find(_audioSettings, audioSettings => audioSettings.VolumeName == mixerName);
+        float volume = audioSettings.Slider.value;
+        audioSettings.AudioMixer.SetFloat(mixerName, Mathf.Log(volume) * 20f);
+    }
+
+    // Implement Automatic Slider Updater 
 
     #endregion
 }

@@ -14,6 +14,8 @@ public class Sounds
 
     [SerializeField] private bool _loop = false;
 
+    [SerializeField] private AudioMixerGroup _mixerGroup;
+
     private AudioSource _soundSource;
 
     #endregion
@@ -26,6 +28,7 @@ public class Sounds
     public bool Loop { get { return _loop; } set { _loop = value; } }
     public AudioSource SoundSource { get { return _soundSource; } set { _soundSource = value; } }
     public AudioClip Clip { get { return _clip; } set { _clip = value; } }
+    public AudioMixerGroup MixerGroup { get { return _mixerGroup; } set { _mixerGroup = value; } }
 
     #endregion
 }
