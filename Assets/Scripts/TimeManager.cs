@@ -6,6 +6,13 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
+
+    #region Instance
+
+    public static TimeManager Instance;
+
+    #endregion
+
     #region Fields
 
     [Header("Components")]
@@ -14,6 +21,7 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _timerText;
 
     #endregion
+
 
 
     [Header("Timer Settings")]
@@ -27,6 +35,12 @@ public class TimeManager : MonoBehaviour
     #region Private Fields
 
     private float _currentTime;
+
+    #endregion
+
+    #region Properties
+
+    public float CurrentTime { get { return _currentTime; } }
 
     #endregion
 
@@ -68,9 +82,16 @@ public class TimeManager : MonoBehaviour
 
     #endregion
 
-    #region Start
+    #region Awake and Start
 
-    void Start()
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+    private void Start()
     {
         _timeFormatsDictionary.Add(TimerFormats.Whole, "0");
         _timeFormatsDictionary.Add(TimerFormats.TenthDecimal, "0.0");

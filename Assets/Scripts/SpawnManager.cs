@@ -17,7 +17,7 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField] private GameObject _hexagonPrefab;
 
-    [SerializeField][Range(0.1f, 10.0f)] private float _spawnRate = 0.8f;
+    [SerializeField][Range(0.1f, 10.0f)] private float _spawnRate = 1.2f;
 
     [SerializeField] private int _currentHexagonAmount = 0;
     [SerializeField] private int _maxHexagonAmount = 4;

@@ -25,13 +25,6 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSettings[] _audioSettings;
 
     #endregion
-    [Header("Audio Settings")]
-
-    #region Private Fields
-
-    private BetterSlider _slider;
-
-    #endregion
 
     #endregion
 
@@ -83,16 +76,16 @@ public class AudioManager : MonoBehaviour
         audio.SoundSource.Play();
     }
 
-    public void LowerAudioPitch(string audioName, float startValue, float endValue, float speed)
-    {
-        Sounds audio = Array.Find(_sounds, sound => sound.Name == audioName);
-        audio.SoundSource.pitch = Mathf.MoveTowards(startValue, endValue, speed * Time.unscaledTime);
-    }
-
     public void StopAudio(string audioName)
     {
         Sounds audio = Array.Find(_sounds, sound => sound.Name == audioName);
         audio.SoundSource.Stop();
+    }
+
+    public void PauseAudio(string audioName)
+    {
+        Sounds audio = Array.Find(_sounds, sound => sound.Name == audioName);
+        audio.SoundSource.Pause();
     }
 
     public void RestartAudio(string audioName)
@@ -103,14 +96,20 @@ public class AudioManager : MonoBehaviour
         audio.SoundSource.Play();
     }
 
+    public void LowerAudioPitch(string audioName, float startValue, float endValue, float speed)
+    {
+        Sounds audio = Array.Find(_sounds, sound => sound.Name == audioName);
+        audio.SoundSource.pitch = Mathf.MoveTowards(startValue, endValue, speed * Time.unscaledTime);
+    }
+
     public void SetVolume(string mixerName)
     {
         AudioSettings audioSettings = Array.Find(_audioSettings, audioSettings => audioSettings.VolumeName == mixerName);
+
         float volume = audioSettings.Slider.value;
+
         audioSettings.AudioMixer.SetFloat(mixerName, Mathf.Log(volume) * 20f);
     }
-
-    // Implement Automatic Slider Updater 
 
     #endregion
 }

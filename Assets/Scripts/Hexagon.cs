@@ -36,8 +36,6 @@ public class Hexagon : MonoBehaviour
     #region Serialized Fields
 
     [SerializeField] private float _startingSize = 15f;
-    [SerializeField][Range(1.0f, 25.0f)] private float _shrinkSpeed;
-
 
     #endregion
 
@@ -50,7 +48,7 @@ public class Hexagon : MonoBehaviour
     [Header("Resize Settings")]
     #region Serialized Field
 
-    [SerializeField] private float _resizeDelay = 0.2f;
+    [SerializeField] private float _resizeDelay = 0.01f;
 
     #endregion
 
@@ -80,21 +78,22 @@ public class Hexagon : MonoBehaviour
     }
     void Update()
     {
+
         Shrink();
     }
 
     void Shrink()
     {
-        transform.localScale -= Vector3.one * _shrinkSpeed * Time.deltaTime;
+        transform.localScale -= Vector3.one * GameManager.Instance.ShrinkSpeed * Time.deltaTime;
 
         if (transform.localScale.x <= 0.5f && _resized == true)
         {
             AnimationManager.Instance.ScaleUpAndDownAnimation(ReferenceManager.Instance.CenterHexagon);
-            StartCoroutine("ResizerAndRotater");
+            Invoke(nameof(ResizerAndRotater), _resizeDelay);
             _hexagonLineRenderer.enabled = false;
             _resized = false;
-            ShrinkSpeedUp(0.01f);
-            Debug.Log($"Shrink Speed is {_shrinkSpeed}");
+            GameManager.Instance.ShrinkSpeedUp(0.05f);
+            Debug.Log($"Shrink Speed is {GameManager.Instance.ShrinkSpeed}");
         }
     }
 
@@ -118,34 +117,22 @@ public class Hexagon : MonoBehaviour
         _hexagonRigidbody.rotation = _rotations[i];
     }
 
-    void ShrinkSpeedUp(float speedUp)
-    {
-        _shrinkSpeed += speedUp;
-    }
+
 
     public void HexagonColorChangerOnHit(Color colorToBe)
     {
         _hexagonLineRenderer.startColor = colorToBe;
         _hexagonLineRenderer.endColor = colorToBe;
     }
-
-    #endregion
-
-    #region Coroutines
-
-    IEnumerator ResizerAndRotater()
+    private void ResizerAndRotater()
     {
-        yield return new WaitForSeconds(_resizeDelay);
-
         transform.localScale = Vector3.one * _startingSize;
         RotationRandomizer();
         _hexagonLineRenderer.enabled = true;
         _resized = true;
-        Debug.Log($"Hexagon Rotation is: {_hexagonRigidbody.rotation}");
     }
 
     #endregion
-
 
     #region Triggers
 
