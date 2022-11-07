@@ -22,6 +22,13 @@ public class AnimationManager : MonoBehaviour
 
     #endregion
 
+    [Header("Color Animation Variables")]
+    #region Serialized Fields
+
+    [SerializeField] private Color _glow;
+
+    #endregion
+
     #endregion
 
 
@@ -35,6 +42,8 @@ public class AnimationManager : MonoBehaviour
 
     public void ScaleUpAndDownAnimation(GameObject gameobject)
     {
+        SpriteRenderer objectRenderer =  gameobject.GetComponent<SpriteRenderer>();
         gameobject.transform.DOScale(_endScale, _animatonDuration).SetLoops(_animationLoopAmount, LoopType.Yoyo);
+        objectRenderer.DOColor(_glow, _animatonDuration).SetLoops(_animationLoopAmount, LoopType.Yoyo);
     }
 }

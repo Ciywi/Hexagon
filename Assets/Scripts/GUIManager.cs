@@ -65,8 +65,8 @@ namespace Managers
 
         public void GameTimeText()
         {
-            _lastGameTimeText.text = $"You Dodged For \n {TimeManager.Instance.CurrentTime:00.0}";
-            _bestGameTimeText.text = $"Best Time \n {GameManager.Instance.BestTime:00.0}";
+            _lastGameTimeText.text = $"You Dodged For \n {TimeManager.Instance.CurrentTime:0.0} \n Seconds";
+            _bestGameTimeText.text = $"Best Time \n {GameManager.Instance.BestTime:0.0} \n Seconds" ;
         }
 
         public void ActivateCanvasGroup(CanvasGroup canvasGroup, bool activate)

@@ -526,6 +526,7 @@ GameObject:
   - component: {fileID: 126596696}
   - component: {fileID: 126596698}
   - component: {fileID: 126596699}
+  - component: {fileID: 126596700}
   m_Layer: 5
   m_Name: Game Name
   m_TagString: Untagged
@@ -584,7 +585,7 @@ MonoBehaviour:
   m_text: HexaDodge
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b328aef9cf051894b9990703b3fb8eb3, type: 2}
-  m_sharedMaterial: {fileID: 5453933334530900524, guid: b328aef9cf051894b9990703b3fb8eb3, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 011b9f7bac78d814eb94bb3765963905, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -726,6 +727,18 @@ MonoBehaviour:
         Impact: 1
   customMaxFontSizers:
     items: []
+--- !u!114 &126596700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126596695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b32f7833a0e83a4682b9285f7981ece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &173050017
 GameObject:
   m_ObjectHideFlags: 0
