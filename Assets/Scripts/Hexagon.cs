@@ -104,7 +104,7 @@ public class Hexagon : MonoBehaviour
     void Update()
     {
         Shrink();
-        ColorLerp();
+        ColorLerp(_hexagonLineRenderer);
     }
 
     void Shrink()
@@ -142,25 +142,11 @@ public class Hexagon : MonoBehaviour
     }
 
 
-    public void SetHexagonColor(Color newColor)
+    public void SetMaterialColor(LineRenderer renderer, Color newColor)
     {
-        _hexagonLineRenderer.startColor = newColor;
-        _hexagonLineRenderer.endColor = newColor;
+        renderer.material.color = newColor;
     }
 
-    public void SetHexagonColor2(Color newColor)
-    {
-        Gradient tempGradient = new Gradient();
-        GradientColorKey[] tempColorKeys = new GradientColorKey[2];
-
-        tempColorKeys[0] = new GradientColorKey(newColor, 0);
-        tempColorKeys[1] = new GradientColorKey(newColor, 1);
-
-        tempGradient.colorKeys = tempColorKeys;
-        _hexagonLineRenderer.colorGradient = tempGradient;
-
-
-    }
     private void ResizerAndRotater()
     {
         transform.localScale = Vector3.one * _startingSize;
@@ -168,33 +154,9 @@ public class Hexagon : MonoBehaviour
         _resized = true;
     }
 
-    private void  ColorLerp()
+    private void  ColorLerp(LineRenderer renderer)
     {
-        //Color initialColor = _hexagonLineRenderer.colorGradient.colorKeys[0].color;
-
-        //SetHexagonColor2(initialColor);
-
-        //while (true)
-        //{
-        //    initialColor = _hexagonLineRenderer.colorGradient.colorKeys[0].color;
-        //    Color targetColor = _lerpColors[_colorIndex];
-
-        //    Color currentColor = _initialColor;
-        //    currentColor = Color.Lerp(currentColor, _lerpColors[_colorIndex], _lerpTime * Time.deltaTime);
-        //    SetHexagonColor(currentColor);
-        //    _timeToLerp = Mathf.Lerp(_timeToLerp, 1f, _lerpTime * Time.deltaTime);
-
-        //    if (_timeToLerp > 0.95f)
-        //    {
-        //        _timeToLerp = 0f;
-        //        _colorIndex++;
-        //        _colorIndex = (_colorIndex >= _colorArrayLength) ? 0 : _colorIndex;
-        //        yield return null;
-        //    }
-        //    yield return null;
-        //}
-
-        _hexagonLineRenderer.material.color = Color.Lerp(_hexagonLineRenderer.material.color, _lerpColors[_colorIndex], _lerpTime * Time.deltaTime);
+        renderer.material.color = Color.Lerp(renderer.material.color, _lerpColors[_colorIndex], _lerpTime * Time.deltaTime);
 
         _timeToLerp = Mathf.Lerp(_timeToLerp, 1f, _lerpTime * Time.deltaTime);
 
@@ -215,7 +177,7 @@ public class Hexagon : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             AudioManager.Instance.PlayAudio("Hexagon Hit Sound Effect");
-            SetHexagonColor(_red);
+            SetMaterialColor(_hexagonLineRenderer, _red);
             AudioManager.Instance.LowerAudioPitch("Game Music", 1.0f, 0.85f, 0.05f);
             StartCoroutine(GameManager.Instance.GameOver());
         }

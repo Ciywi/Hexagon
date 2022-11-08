@@ -14,7 +14,7 @@ public class TextGlowScript : MonoBehaviour
     void Awake()
     {
         _gameText = GetComponent<BetterTextMeshProUGUI>();
-        _gameText.fontSharedMaterial.SetFloat("_GlowPower", 0.5f);
+        _gameText.fontSharedMaterial.SetFloat("_GlowPower", 0.25f);
     }
 
     #endregion
