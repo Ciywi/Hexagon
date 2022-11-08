@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TheraBytes.BetterUi;
-using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Managers
 {
@@ -19,10 +16,10 @@ namespace Managers
         #region Fields
 
         [Header("Components")]
-        #region Serialized Fields
+        #region Private Fields
 
-        [SerializeField] private BetterToggle _settingsToggle;
-        [SerializeField] private CanvasGroup _settingCanvas;
+        private BetterToggle _settingsToggle;
+        private CanvasGroup _settingCanvas;
 
         #endregion
 
@@ -52,6 +49,8 @@ namespace Managers
 
         public void ActivateSettingsCanvasGroup()
         {
+            _settingsToggle = GameObject.Find("Settings Toggle").GetComponent<BetterToggle>();
+            _settingCanvas = GameObject.Find("Settings Panel").GetComponent<CanvasGroup>();
 
             if (_settingsToggle.isOn)
             {

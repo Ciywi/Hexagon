@@ -109,6 +109,7 @@ public class AudioManager : MonoBehaviour
         float volume = audioSettings.Slider.value;
 
         audioSettings.AudioMixer.SetFloat(mixerName, Mathf.Log(volume) * 20f);
+
     }
 
     #endregion

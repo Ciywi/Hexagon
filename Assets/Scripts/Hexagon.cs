@@ -12,17 +12,20 @@ public class Hexagon : MonoBehaviour
 
     #endregion
 
+    [Header("Components")]
+    #region Private Fields
+
+    //private MeshRenderer _hexagonMeshRenderer;
+    private Rigidbody2D _hexagonRigidbody;
+    private LineRenderer _hexagonLineRenderer;
+
+    #endregion
+
+
     [Header("Trigger Settings")]
     #region Private Fields
 
     private Color _red = Color.red;
-
-    #endregion
-
-    #region Private Fields
-
-    private Rigidbody2D _hexagonRigidbody;
-    private LineRenderer _hexagonLineRenderer;
 
     #endregion
 
@@ -59,6 +62,22 @@ public class Hexagon : MonoBehaviour
 
     #endregion
 
+    [Header("Color Lerp Settings")]
+    #region Serialized Fields
+
+    [SerializeField][Range(0f, 1f)] private float _lerpTime;
+    [SerializeField] Color[] _lerpColors;
+
+    #endregion
+
+    #region Private Fields
+
+    private int _colorIndex = 0;
+    private int _colorArrayLength;
+    private float _timeToLerp = 0.0f;
+
+    #endregion
+
     private void Awake()
     {
         if (Instance == null)
@@ -68,6 +87,7 @@ public class Hexagon : MonoBehaviour
 
         _hexagonRigidbody = GetComponent<Rigidbody2D>();
         _hexagonLineRenderer = GetComponent<LineRenderer>();
+        //_hexagonMeshRenderer = GetComponent<MeshRenderer>();
     }
 
     private void Start()
@@ -75,11 +95,12 @@ public class Hexagon : MonoBehaviour
         SetRotations();
         RotationRandomizer();
         transform.localScale = Vector3.one * _startingSize;
+        _colorArrayLength = _lerpColors.Length;
     }
     void Update()
     {
-
         Shrink();
+        LerpColor();
     }
 
     void Shrink()
@@ -90,7 +111,7 @@ public class Hexagon : MonoBehaviour
         {
             AnimationManager.Instance.ScaleUpAndDownAnimation(ReferenceManager.Instance.CenterHexagon);
             Invoke(nameof(ResizerAndRotater), _resizeDelay);
-            _hexagonLineRenderer.enabled = false;
+            //_hexagonLineRenderer.enabled = false;
             _resized = false;
             GameManager.Instance.ShrinkSpeedUp(0.05f);
             Debug.Log($"Shrink Speed is {GameManager.Instance.ShrinkSpeed}");
@@ -128,8 +149,22 @@ public class Hexagon : MonoBehaviour
     {
         transform.localScale = Vector3.one * _startingSize;
         RotationRandomizer();
-        _hexagonLineRenderer.enabled = true;
+        //_hexagonLineRenderer.enabled = true;
         _resized = true;
+    }
+
+    private void LerpColor()
+    {
+        _hexagonLineRenderer.material.color = Color.Lerp(_hexagonLineRenderer.material.color, _lerpColors[_colorIndex], _lerpTime * Time.deltaTime);
+
+        _timeToLerp = Mathf.Lerp(_timeToLerp, 1f, _lerpTime * Time.deltaTime);
+
+        if (_timeToLerp > 0.95f)
+        {
+            _timeToLerp = 0f;
+            _colorIndex++;
+            _colorIndex = (_colorIndex >= _colorArrayLength) ? 0 : _colorIndex;
+        }
     }
 
     #endregion

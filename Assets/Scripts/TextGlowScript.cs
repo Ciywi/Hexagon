@@ -14,13 +14,18 @@ public class TextGlowScript : MonoBehaviour
     void Awake()
     {
         _gameText = GetComponent<BetterTextMeshProUGUI>();
+        _gameText.fontSharedMaterial.SetFloat("_GlowPower", 0.5f);
     }
 
     #endregion
 
     private void Start()
     {
-        _gameText.fontSharedMaterial.DOFloat(1.0f, "_GlowPower", 1.0f).SetLoops(-1, LoopType.Restart);
-                
+        TextGlow(_gameText);
+    }
+
+    void TextGlow(BetterTextMeshProUGUI textToGlow)
+    {
+        textToGlow.fontSharedMaterial.DOFloat(1.0f, "_GlowPower", 1.0f).SetLoops(-1, LoopType.Restart);
     }
 }

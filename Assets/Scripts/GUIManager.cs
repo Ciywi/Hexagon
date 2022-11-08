@@ -18,13 +18,15 @@ namespace Managers
         [Header("Components")]
         #region Serialized Fields
 
-        [SerializeField] private CanvasGroup _gameOverCanvas;
+        [SerializeField] private CanvasGroup _gameOverPanel;
+        [SerializeField] private CanvasGroup _pauseMenuPanel;
 
         #endregion
 
         #region Properties
 
-        public CanvasGroup GameOverCanvas { get { return _gameOverCanvas; } }
+        public CanvasGroup GameOverPanel { get { return _gameOverPanel; } }
+        public CanvasGroup PauseMenuPanel { get { return _pauseMenuPanel; } }
 
         #endregion
 
@@ -36,7 +38,7 @@ namespace Managers
 
         #endregion
 
-        #region Awake and Start
+        #region Awake
 
         void Awake()
         {
@@ -53,11 +55,6 @@ namespace Managers
             DontDestroyOnLoad(gameObject);
         }
 
-        void Start()
-        {
-            
-        }
-
         #endregion
 
 
@@ -65,8 +62,8 @@ namespace Managers
 
         public void GameTimeText()
         {
-            _lastGameTimeText.text = $"You Dodged For \n {TimeManager.Instance.CurrentTime:0.0} \n Seconds";
-            _bestGameTimeText.text = $"Best Time \n {GameManager.Instance.BestTime:0.0} \n Seconds" ;
+            _lastGameTimeText.text = $"You Dodged For \n {TimeManager.Instance.CurrentTime:0.0} Seconds";
+            _bestGameTimeText.text = $"Best Time \n {GameManager.Instance.BestTime:0.0} Seconds" ;
         }
 
         public void ActivateCanvasGroup(CanvasGroup canvasGroup, bool activate)

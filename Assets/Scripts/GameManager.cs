@@ -20,6 +20,13 @@ public class GameManager : MonoBehaviour
 
     private float _startGameDelay = 0.2f;
     private bool _isGameOver = false;
+    [SerializeField] private bool _isPaused = false;
+
+    #endregion
+
+    #region Properties
+
+    public bool IsPaused { get { return _isPaused; } set { _isPaused = value; } }
 
     #endregion
 
@@ -82,7 +89,20 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (_isGameOver)
+        if (Input.GetKeyDown(KeyCode.Escape) && _isGameOver == false)
+        {
+            if (_isPaused == false)
+            {
+                PauseGame();
+            }
+            else if (_isPaused == true)
+            {
+                ResumeGame();
+            }
+        }
+
+
+        if (this._isGameOver)
         {
             if (Input.anyKeyDown)
             {
@@ -99,22 +119,16 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.PlayAudio("Game Music");
     }
 
-    private void PauseGame()
-    {
-
-    }
-
+    #endregion
     private void RestartGame()
     {
-        GUIManager.Instance.ActivateCanvasGroup(GUIManager.Instance.GameOverCanvas, false);
+        GUIManager.Instance.ActivateCanvasGroup(GUIManager.Instance.GameOverPanel, false);
         SceneManager.LoadScene(1);
         Time.timeScale = 1.0f;
         ShrinkSpeed = _startingShrinkSpeed;
         AudioManager.Instance.RestartAudio("Game Music");
         _isGameOver = false;
     }
-
-    #endregion
 
     #region Public Methods
 
@@ -123,6 +137,30 @@ public class GameManager : MonoBehaviour
         Invoke(nameof(StartGame), _startGameDelay);
         AudioManager.Instance.StopAudio("Menu Music");
     }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0.0f;
+        _isPaused = true;
+        GUIManager.Instance.ActivateCanvasGroup(GUIManager.Instance.PauseMenuPanel, true);
+        AudioManager.Instance.PauseAudio("Game Music");
+        Debug.Log($"isPaused = {_isPaused}");
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1.0f;
+        _isPaused = false;
+        GUIManager.Instance.ActivateCanvasGroup(GUIManager.Instance.PauseMenuPanel, false);
+        AudioManager.Instance.PlayAudio("Game Music");
+        Debug.Log($"isPaused = {_isPaused}");
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
 
     public void ShrinkSpeedUp(float speedUp)
     {
@@ -151,7 +189,7 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.StopAudio("Game Music");
         PersonalRecord();
         GUIManager.Instance.GameTimeText();
-        GUIManager.Instance.ActivateCanvasGroup(GUIManager.Instance.GameOverCanvas, true);
+        GUIManager.Instance.ActivateCanvasGroup(GUIManager.Instance.GameOverPanel, true);
         _isGameOver = true;
     }
 
