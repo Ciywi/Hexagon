@@ -224,14 +224,14 @@ MonoBehaviour:
   m_text: Best Time
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b328aef9cf051894b9990703b3fb8eb3, type: 2}
-  m_sharedMaterial: {fileID: 5453933334530900524, guid: b328aef9cf051894b9990703b3fb8eb3, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 93ac235832b23e042911ce9d1603f099, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281508913
-  m_fontColor: {r: 0.19063723, g: 0.6415094, b: 0.1958953, a: 1}
+    rgba: 4279096350
+  m_fontColor: {r: 0.1190305, g: 0.8301887, b: 0.05090782, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1644,14 +1644,14 @@ MonoBehaviour:
   m_text: Press Any Key To Retry
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b328aef9cf051894b9990703b3fb8eb3, type: 2}
-  m_sharedMaterial: {fileID: 5453933334530900524, guid: b328aef9cf051894b9990703b3fb8eb3, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 93ac235832b23e042911ce9d1603f099, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281508913
-  m_fontColor: {r: 0.19215687, g: 0.6431373, b: 0.19607843, a: 1}
+    rgba: 4279096350
+  m_fontColor: {r: 0.1190305, g: 0.8301887, b: 0.05090782, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1798,6 +1798,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1836,7 +1837,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -1904,6 +1905,23 @@ Transform:
   m_Father: {fileID: 677535712}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 324716a4f585c01478c0ae13ab60d6d5, type: 2}
 --- !u!1 &603055980
 GameObject:
   m_ObjectHideFlags: 0
@@ -1973,14 +1991,14 @@ MonoBehaviour:
   m_text: 'You Dodged For '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b328aef9cf051894b9990703b3fb8eb3, type: 2}
-  m_sharedMaterial: {fileID: 5453933334530900524, guid: b328aef9cf051894b9990703b3fb8eb3, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 93ac235832b23e042911ce9d1603f099, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281508913
-  m_fontColor: {r: 0.19063723, g: 0.6415094, b: 0.1958953, a: 1}
+    rgba: 4279096350
+  m_fontColor: {r: 0.1190305, g: 0.8301887, b: 0.05090782, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2692,8 +2710,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Continue
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b328aef9cf051894b9990703b3fb8eb3, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 3a6ace8a788aec248bcb27b83b0477f6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2804,7 +2822,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 8ab2bce1b1fd1df4999ca84287f3e00c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2911,8 +2929,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Exit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b328aef9cf051894b9990703b3fb8eb3, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 3a6ace8a788aec248bcb27b83b0477f6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3156,7 +3174,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 8ab2bce1b1fd1df4999ca84287f3e00c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3741,7 +3759,7 @@ MonoBehaviour:
   m_text: PAUSED
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b328aef9cf051894b9990703b3fb8eb3, type: 2}
-  m_sharedMaterial: {fileID: 5453933334530900524, guid: b328aef9cf051894b9990703b3fb8eb3, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 4f9e11ea5ba98e046b46d3568f2b1818, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
