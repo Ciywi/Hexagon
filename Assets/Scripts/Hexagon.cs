@@ -71,12 +71,6 @@ public class Hexagon : MonoBehaviour
 
     #region Private Fields
 
-    Color _initialColor;
-
-    #endregion
-
-    #region Private Fields
-
     private int _colorIndex = 0;
     private int _colorArrayLength;
     private float _timeToLerp = 0.0f;

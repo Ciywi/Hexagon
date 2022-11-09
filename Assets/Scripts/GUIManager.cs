@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TheraBytes.BetterUi;
 using TMPro;
 using UnityEngine;
 
@@ -33,14 +34,21 @@ namespace Managers
         [Header("Best Time Texts")]
         #region Serialized Fields
 
-        [SerializeField] private TextMeshProUGUI _lastGameTimeText;
-        [SerializeField] private TextMeshProUGUI _bestGameTimeText;
+        [SerializeField] private BetterTextMeshProUGUI _lastGameTimeText;
+        [SerializeField] private BetterTextMeshProUGUI _yourNewBestText;
+        [SerializeField] private BetterTextMeshProUGUI _bestTimeTextOnGUI;
 
         #endregion
 
-        #region Awake
+        #region Properties
 
-        void Awake()
+        public BetterTextMeshProUGUI YourNewBestText { get { return _yourNewBestText; } set { _yourNewBestText = value; } }
+
+        #endregion
+
+        #region Awake and Start
+
+        private void Awake()
         {
             if (Instance == null)
             {
@@ -55,6 +63,12 @@ namespace Managers
             DontDestroyOnLoad(gameObject);
         }
 
+
+        private void Start()
+        {
+            _bestTimeTextOnGUI.text = $"Best Time {GameManager.Instance.BestTime:0.0}";
+        }
+
         #endregion
 
 
@@ -63,7 +77,7 @@ namespace Managers
         public void GameTimeText()
         {
             _lastGameTimeText.text = $"You Dodged For \n {TimeManager.Instance.CurrentTime:0.0} Seconds";
-            _bestGameTimeText.text = $"Best Time \n {GameManager.Instance.BestTime:0.0} Seconds" ;
+            _bestTimeTextOnGUI.text = $"Best Time {GameManager.Instance.BestTime:0.0}";
         }
 
         public void ActivateCanvasGroup(CanvasGroup canvasGroup, bool activate)

@@ -56,6 +56,9 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        GetSavedVolume("Master");
+        GetSavedVolume("Music");
+        GetSavedVolume("SFX");
         PlayAudio("Menu Music");
     }
 
@@ -110,6 +113,17 @@ public class AudioManager : MonoBehaviour
 
         audioSettings.AudioMixer.SetFloat(mixerName, Mathf.Log(volume) * 20f);
 
+        PlayerPrefs.SetFloat(mixerName, audioSettings.Slider.value);
+    }
+
+    private void GetSavedVolume(string mixerName)
+    {
+        AudioSettings audioSettings = Array.Find(_audioSettings, audioSettings => audioSettings.VolumeName == mixerName);
+
+        float savedVolume = PlayerPrefs.GetFloat(mixerName, audioSettings.Slider.value);
+        
+        audioSettings.Slider.value = savedVolume;
+        audioSettings.AudioMixer.SetFloat(mixerName, Mathf.Log(savedVolume) * 20f);
     }
 
     #endregion

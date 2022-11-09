@@ -83,6 +83,8 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        GetPersonalRecord();
     }
 
     #endregion
@@ -122,12 +124,18 @@ public class GameManager : MonoBehaviour
     #endregion
     private void RestartGame()
     {
+        GUIManager.Instance.YourNewBestText.alpha = 0;
         GUIManager.Instance.ActivateCanvasGroup(GUIManager.Instance.GameOverPanel, false);
         SceneManager.LoadScene(1);
         Time.timeScale = 1.0f;
         ShrinkSpeed = _startingShrinkSpeed;
         AudioManager.Instance.RestartAudio("Game Music");
         _isGameOver = false;
+    }
+
+    private void GetPersonalRecord()
+    {
+        _bestTime = PlayerPrefs.GetFloat("BestTime", _bestTime);
     }
 
     #region Public Methods
@@ -144,7 +152,6 @@ public class GameManager : MonoBehaviour
         _isPaused = true;
         GUIManager.Instance.ActivateCanvasGroup(GUIManager.Instance.PauseMenuPanel, true);
         AudioManager.Instance.PauseAudio("Game Music");
-        Debug.Log($"isPaused = {_isPaused}");
     }
 
     public void ResumeGame()
@@ -153,7 +160,6 @@ public class GameManager : MonoBehaviour
         _isPaused = false;
         GUIManager.Instance.ActivateCanvasGroup(GUIManager.Instance.PauseMenuPanel, false);
         AudioManager.Instance.PlayAudio("Game Music");
-        Debug.Log($"isPaused = {_isPaused}");
     }
 
     public void ExitGame()
@@ -172,6 +178,8 @@ public class GameManager : MonoBehaviour
         if (TimeManager.Instance.CurrentTime > _bestTime)
         {
             _bestTime = TimeManager.Instance.CurrentTime;
+            PlayerPrefs.SetFloat("BestTime", _bestTime);
+            GUIManager.Instance.YourNewBestText.alpha = 1;
         }
     }
 
