@@ -898,7 +898,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &251792624
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1565,7 +1565,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press To Retry
+  m_text: Press Amy Key To Retry
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b328aef9cf051894b9990703b3fb8eb3, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 93ac235832b23e042911ce9d1603f099, type: 2}
@@ -3463,7 +3463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1415977500
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4023,7 +4023,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1881967106
 RectTransform:
   m_ObjectHideFlags: 0
