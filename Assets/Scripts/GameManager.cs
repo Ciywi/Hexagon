@@ -91,17 +91,18 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && _isGameOver == false)
-        {
-            if (_isPaused == false)
-            {
-                PauseGame();
-            }
-            else if (_isPaused == true)
-            {
-                ResumeGame();
-            }
-        }
+        /// Activate On Windows Build
+        //if (Input.GetKeyDown(KeyCode.Escape) && _isGameOver == false)
+        //{
+        //    if (_isPaused == false)
+        //    {
+        //        PauseGame();
+        //    }
+        //    else if (_isPaused == true)
+        //    {
+        //        ResumeGame();
+        //    }
+        //}
 
 
         if (this._isGameOver)

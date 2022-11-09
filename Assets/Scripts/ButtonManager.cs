@@ -53,6 +53,11 @@ namespace Managers
         {
             GameManager.Instance.ResumeGame();
         }
+
+        public void PauseButton()
+        {
+            GameManager.Instance.PauseGame();
+        }
     }
 
 }

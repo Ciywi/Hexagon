@@ -34,15 +34,15 @@ namespace Managers
         [Header("Best Time Texts")]
         #region Serialized Fields
 
-        [SerializeField] private BetterTextMeshProUGUI _lastGameTimeText;
-        [SerializeField] private BetterTextMeshProUGUI _yourNewBestText;
-        [SerializeField] private BetterTextMeshProUGUI _bestTimeTextOnGUI;
+        [SerializeField] private TextMeshProUGUI _lastGameTimeText;
+        [SerializeField] private TextMeshProUGUI _yourNewBestText;
+        [SerializeField] private TextMeshProUGUI _bestTimeTextOnGUI;
 
         #endregion
 
         #region Properties
 
-        public BetterTextMeshProUGUI YourNewBestText { get { return _yourNewBestText; } set { _yourNewBestText = value; } }
+        public TextMeshProUGUI YourNewBestText { get { return _yourNewBestText; } set { _yourNewBestText = value; } }
 
         #endregion
 

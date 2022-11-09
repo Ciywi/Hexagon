@@ -10,32 +10,30 @@ public class Move : MonoBehaviour
     [Header("Movement Settings")]
     #region Serialize Field
 
-    [SerializeField][Range(1.0f,750.0f)] private float _moveSpeed = 500.0f;
+    [SerializeField][Range(1.0f,750.0f)] private float _moveSpeed = 550.0f;
 
     #endregion
 
     #region Private Fields
 
-    private float _xInput;
+    // Windows Input
+    // private float _xInput;
+
+    // Mobile Input
+    private int _moveInput;
 
     #endregion
 
     #endregion
-
-
-    void Update()
-    {
-        GetInput();
-    }
 
     private void FixedUpdate()
     {
-        RotateAroundObject(ReferenceManager.Instance.CenterHexagon, _xInput, _moveSpeed);
+        RotateAroundObject(ReferenceManager.Instance.CenterHexagon, _moveInput, _moveSpeed);
     }
 
-    private void GetInput()
+    public void GetInput(int movementDirection)
     {
-        _xInput = Input.GetAxisRaw("Horizontal");
+        _moveInput = movementDirection;
     }
 
     private void RotateAroundObject(GameObject objectToRotateAround, float xInput, float moveSpeed)
