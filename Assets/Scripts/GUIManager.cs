@@ -31,6 +31,14 @@ namespace Managers
 
         #endregion
 
+        [Header("Resume Game Countdown Settings")]
+        #region Serialized Fields
+
+        [SerializeField] private CanvasGroup _resumeGameCountdownPanel;
+        [SerializeField] private TextMeshProUGUI _resumeGameCountdownText;
+
+        #endregion
+
         [Header("Best Time Texts")]
         #region Serialized Fields
 
@@ -95,6 +103,45 @@ namespace Managers
             canvasGroup.interactable = activate;
 
         }
+
+        public void StartResumeGameCountdown()
+        {
+            StartCoroutine(nameof(ResumeGameCountdown));
+        }
+
+        #endregion
+
+        #region Coroutines
+
+        #region Public
+
+        public IEnumerator ResumeGameCountdown()
+        {
+            int i = 3;
+
+            _resumeGameCountdownText.color = Color.green;
+            _resumeGameCountdownText.text = $"{i}";
+            ActivateCanvasGroup(PauseMenuPanel, false);
+            ActivateCanvasGroup(_resumeGameCountdownPanel, true);
+
+            yield return new WaitForSecondsRealtime(1);
+            i--;
+            _resumeGameCountdownText.text = $"{i}";
+            _resumeGameCountdownText.color = Color.yellow;
+
+            yield return new WaitForSecondsRealtime(1);
+            i--;
+            _resumeGameCountdownText.text = $"{i}";
+            _resumeGameCountdownText.color = Color.red;
+
+            yield return new WaitForSecondsRealtime(1);
+            ActivateCanvasGroup(_resumeGameCountdownPanel, false);
+
+            GameManager.Instance.ResumeGame();
+
+        }
+
+        #endregion
 
         #endregion
     }

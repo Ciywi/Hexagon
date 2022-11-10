@@ -15,7 +15,7 @@ namespace Managers
         #endregion
 
 
-        #region Awake and Start
+        #region Awake
 
         void Awake()
         {
@@ -32,11 +32,6 @@ namespace Managers
             DontDestroyOnLoad(gameObject);
         }
 
-        void Start()
-        {
-            
-        }
-
         #endregion
 
         public void PlayButton()
@@ -47,11 +42,6 @@ namespace Managers
         public void ExitButton()
         {
             GameManager.Instance.ExitGame();
-        }
-
-        public void ResumeButton()
-        {
-            GameManager.Instance.ResumeGame();
         }
 
         public void PauseButton()

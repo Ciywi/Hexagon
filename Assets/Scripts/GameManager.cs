@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using Managers;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     #region Private Fields
 
     private float _startGameDelay = 0.2f;
+
     private bool _isGameStarted = false;
     private bool _isGameOver = false;
     private bool _isPaused = false;
@@ -111,7 +113,7 @@ public class GameManager : MonoBehaviour
             }
             else if (_isPaused == true)
             {
-                ResumeGame();
+                StartCoroutine(GUIManager.Instance.ResumeGameCountdown());
             }
         }
 
@@ -184,7 +186,6 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         _isPaused = false;
-        GUIManager.Instance.ActivateCanvasGroup(GUIManager.Instance.PauseMenuPanel, false);
         AudioManager.Instance.PlayAudio("Game Music");
     }
 
@@ -213,6 +214,8 @@ public class GameManager : MonoBehaviour
 
     #region Coroutines
 
+    #region Public
+
     public IEnumerator GameOver()
     {
         Time.timeScale = 0.2f;
@@ -226,6 +229,8 @@ public class GameManager : MonoBehaviour
         GUIManager.Instance.ActivateCanvasGroup(GUIManager.Instance.GameOverPanel, true);
         _isGameOver = true;
     }
+
+    #endregion
 
     #endregion
 
