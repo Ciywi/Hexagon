@@ -19,8 +19,9 @@ public class GameManager : MonoBehaviour
     #region Private Fields
 
     private float _startGameDelay = 0.2f;
+    private bool _isGameStarted = false;
     private bool _isGameOver = false;
-    [SerializeField] private bool _isPaused = false;
+    private bool _isPaused = false;
 
     #endregion
 
@@ -129,6 +130,7 @@ public class GameManager : MonoBehaviour
         _startingShrinkSpeed = _shrinkSpeed;
         SceneManager.LoadScene(1);
         AudioManager.Instance.PlayAudio("Game Music");
+        _isGameStarted = true;
     }
 
     #endregion
@@ -145,11 +147,14 @@ public class GameManager : MonoBehaviour
 
     private void SpeedUpTheAudio()
     {
+        if (_isGameStarted == false || _isPaused == true)
+            return;
+
         _musicTime += Time.deltaTime;
 
-        if (_musicTime >= 195f)
+        if (_musicTime >= 10f)
         {
-            AudioManager.Instance.IncrementAudioPitch("Game Music", 0.3f);
+            AudioManager.Instance.IncrementAudioPitch("Game Music", 0.1f);
             _musicTime = 0;
         }
     }

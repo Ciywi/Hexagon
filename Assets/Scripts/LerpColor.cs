@@ -1,28 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class LerpColor : MonoBehaviour
 {
-    #region Instance
-
-    public static LerpColor Instance;
-
-    #endregion
-
     [Header("Components")]
     #region Private Region
 
-    private MeshRenderer _gameObjectMeshRenderer;
+    private TextMeshProUGUI _gameObjectText;
 
     #endregion
 
     [Header("Color Lerp Settings")]
+    #region Private Fields
+
+    private Color _objectColor;
+
+    #endregion
+
     #region Serialized Fields
 
     [SerializeField][Range(0f, 1f)] private float _lerpTime;
     [SerializeField] Color[] _lerpColors;
-    [SerializeField] Color _objectColor;
 
     #endregion
 
@@ -38,12 +37,8 @@ public class LerpColor : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-
         _colorArrayLength = _lerpColors.Length;
+        _gameObjectText = GetComponent<TextMeshProUGUI>();
     }
     #endregion
 
@@ -51,16 +46,17 @@ public class LerpColor : MonoBehaviour
 
     private void Update()
     {
-        ColorLerp(_objectColor);
+        ColorLerp();
     }
 
     #endregion
 
     #region Private Methods
 
-    private void ColorLerp(Color color)
+    private void ColorLerp()
     {
-        color = Color.Lerp(color, _lerpColors[_colorIndex], _lerpTime * Time.deltaTime);
+        _gameObjectText.color = Color.Lerp(_gameObjectText.color, _lerpColors[_colorIndex], _lerpTime * Time.deltaTime);
+        _gameObjectText.fontSharedMaterial.SetColor("_GlowColor", Color.Lerp(_gameObjectText.color, _lerpColors[_colorIndex], _lerpTime * Time.deltaTime));
 
         _timeToLerp = Mathf.Lerp(_timeToLerp, 1f, _lerpTime * Time.deltaTime);
 
