@@ -16,7 +16,7 @@ public class AnimationManager : MonoBehaviour
     [Header("Scale Up And Down Animation Settings")]
     #region Serialized Fields
 
-    [SerializeField][Range(0.1f, 1.5f)] private float _endScale;
+    [SerializeField][Range(0.1f, 3f)] private float _endScale;
     [SerializeField][Range(0.025f, 0.2f)] private float _animatonDuration;
     [SerializeField][Range(2, 10)] private int _animationLoopAmount;
 
