@@ -152,10 +152,10 @@ public class GameManager : MonoBehaviour
 
         _musicTime += Time.deltaTime;
 
-        if (_musicTime >= 10f)
+        if (_musicTime >= 195f)
         {
             AudioManager.Instance.IncrementAudioPitch("Game Music", 0.1f);
-            _musicTime = 0;
+            _musicTime = 95;
         }
     }
 
