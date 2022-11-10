@@ -174,6 +174,7 @@ public class Hexagon : MonoBehaviour
             SetMaterialColor(_hexagonLineRenderer, _red);
             AudioManager.Instance.LowerAudioPitch("Game Music", 1.0f, 0.85f, 0.05f);
             StartCoroutine(GameManager.Instance.GameOver());
+            CinemachineCameraShake.Instance.ShakeCamera(3, 0.20f);
         }
     }
 
