@@ -104,10 +104,16 @@ public class AudioManager : MonoBehaviour
         audio.SoundSource.Play();
     }
 
-    public void LowerAudioPitch(string audioName, float startValue, float endValue, float speed)
+    public void DecrementAudioPitch(string audioName, float endPitchValue)
     {
         Sounds audio = Array.Find(_sounds, sound => sound.Name == audioName);
-        audio.SoundSource.pitch = Mathf.MoveTowards(startValue, endValue, speed * Time.unscaledTime);
+        audio.SoundSource.pitch = endPitchValue;
+    }
+
+    public void IncrementAudioPitch(string audioName, float incrementValue)
+    {
+        Sounds audio = Array.Find(_sounds, sound => sound.Name == audioName);
+        audio.SoundSource.pitch += incrementValue;
     }
 
     public void SetVolume(string mixerName)

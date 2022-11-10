@@ -61,6 +61,14 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+
+    [Header("Music Speed Settings")]
+    #region Private Fields
+
+    float _musicTime = 0;
+
+    #endregion
+
     [Header("Color Variables")]
     #region Private Fields
 
@@ -91,6 +99,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        SpeedUpTheAudio();
+
         /// Activate On Windows Build
         if (Input.GetKeyDown(KeyCode.Escape) && _isGameOver == false)
         {
@@ -104,8 +114,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-
-        if (this._isGameOver)
+        if (_isGameOver)
         {
             if (Input.anyKeyDown)
             {
@@ -132,6 +141,17 @@ public class GameManager : MonoBehaviour
         ShrinkSpeed = _startingShrinkSpeed;
         AudioManager.Instance.RestartAudio("Game Music");
         _isGameOver = false;
+    }
+
+    private void SpeedUpTheAudio()
+    {
+        _musicTime += Time.deltaTime;
+
+        if (_musicTime >= 195f)
+        {
+            AudioManager.Instance.IncrementAudioPitch("Game Music", 0.3f);
+            _musicTime = 0;
+        }
     }
 
     private void GetPersonalRecord()

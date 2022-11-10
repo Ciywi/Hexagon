@@ -172,7 +172,7 @@ public class Hexagon : MonoBehaviour
         {
             AudioManager.Instance.PlayAudio("Hexagon Hit Sound Effect");
             SetMaterialColor(_hexagonLineRenderer, _red);
-            AudioManager.Instance.LowerAudioPitch("Game Music", 1.0f, 0.85f, 0.05f);
+            AudioManager.Instance.DecrementAudioPitch("Game Music", 0.5f);
             StartCoroutine(GameManager.Instance.GameOver());
             CinemachineCameraShake.Instance.ShakeCamera(3, 0.20f);
         }
