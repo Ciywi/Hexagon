@@ -51,6 +51,11 @@ public class AudioManager : MonoBehaviour
             sound.SoundSource.volume = sound.Volume;
             sound.SoundSource.pitch = sound.Pitch;
             sound.SoundSource.outputAudioMixerGroup = sound.MixerGroup;
+
+            if (sound.Name == "Game Music")
+            {
+                sound.AudioSpectrum = gameObject.AddComponent<AudioSpectrum>();
+            }
         }
     }
 

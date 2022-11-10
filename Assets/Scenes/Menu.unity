@@ -216,12 +216,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25.677086
+  m_fontSize: 25.729168
   m_fontSizeBase: 0
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 25.677086
+  m_fontSizeMin: 18.03651
+  m_fontSizeMax: 25.729168
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -428,11 +428,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 449.349
+  m_fontSize: 450.26044
   m_fontSizeBase: 228.24072
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 449.349
+  m_fontSizeMin: 450.26044
   m_fontSizeMax: 500
   m_fontStyle: 2
   m_HorizontalAlignment: 2
@@ -719,12 +719,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25.677086
+  m_fontSize: 25.729168
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 25.677086
+  m_fontSizeMin: 18.03651
+  m_fontSizeMax: 25.729168
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -12466,12 +12466,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25.677086
+  m_fontSize: 25.729168
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 25.677086
+  m_fontSizeMin: 18.03651
+  m_fontSizeMax: 25.729168
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -12975,7 +12975,7 @@ MonoBehaviour:
     _loop: 0
     _mixerGroup: {fileID: 7593055697623162265, guid: 1d1a495b1cd2f954fa08fee648f37e2e, type: 2}
   - _name: Game Music
-    _clip: {fileID: 8300000, guid: f5219453258f2984b88765da899d7f36, type: 3}
+    _clip: {fileID: 8300000, guid: 269a505171a8d2441a95015b4815d99c, type: 3}
     _volume: 1
     _pitch: 1
     _loop: 1

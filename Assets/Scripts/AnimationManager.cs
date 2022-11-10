@@ -41,10 +41,14 @@ public class AnimationManager : MonoBehaviour
     }
 
     public void ScaleUpAndDownAnimation(GameObject gameobject)
-    {
-        SpriteRenderer objectRenderer =  gameobject.GetComponent<SpriteRenderer>();
+    { 
         gameobject.transform.DOScale(_endScale, _animatonDuration).SetLoops(_animationLoopAmount, LoopType.Yoyo);
-        objectRenderer.DOColor(_glow, _animatonDuration).SetLoops(_animationLoopAmount, LoopType.Yoyo);
-        CinemachineCameraShake.Instance.ShakeCamera(1f, 0.5f);
     }
+
+    public void GlowAnimation(GameObject gameobject)
+    {
+        SpriteRenderer objectRenderer = gameobject.GetComponent<SpriteRenderer>();
+        objectRenderer.DOColor(_glow, _animatonDuration).SetLoops(_animationLoopAmount, LoopType.Yoyo);
+    }
+
 }

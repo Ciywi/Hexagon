@@ -107,11 +107,10 @@ public class Hexagon : MonoBehaviour
 
         if (transform.localScale.x <= 0.5f && _resized == true)
         {
-            AnimationManager.Instance.ScaleUpAndDownAnimation(ReferenceManager.Instance.CenterHexagon);
+            AnimationManager.Instance.GlowAnimation(ReferenceManager.Instance.CenterHexagon);
+            CinemachineCameraShake.Instance.ShakeCamera(1f, 0.5f);
             Invoke(nameof(ResizerAndRotater), _resizeDelay);
             _resized = false;
-            GameManager.Instance.ShrinkSpeedUp(0.05f);
-            Debug.Log($"Shrink Speed is {GameManager.Instance.ShrinkSpeed}");
         }
     }
 
@@ -145,6 +144,7 @@ public class Hexagon : MonoBehaviour
     {
         transform.localScale = Vector3.one * _startingSize;
         RotationRandomizer();
+        GameManager.Instance.ShrinkSpeedUp(0.05f);
         _resized = true;
     }
 
