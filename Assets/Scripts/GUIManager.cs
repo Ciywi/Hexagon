@@ -19,17 +19,31 @@ namespace Managers
         [Header("Components")]
         #region Serialized Fields
 
-        [SerializeField] private CanvasGroup _gameOverPanel;
         [SerializeField] private CanvasGroup _pauseMenuPanel;
 
         #endregion
 
         #region Properties
 
-        public CanvasGroup GameOverPanel { get { return _gameOverPanel; } }
         public CanvasGroup PauseMenuPanel { get { return _pauseMenuPanel; } }
 
         #endregion
+
+        [Header("Game Over Panel Settings")]
+        #region Serialized Fields
+
+        [SerializeField] private CanvasGroup _gameOverPanel;
+        [SerializeField] private Transform _gameOverBorderTransform;
+
+        #endregion
+
+        #region Properties
+
+        public CanvasGroup GameOverPanel { get { return _gameOverPanel; } }
+        public Transform GameOverBorderTransform { get { return _gameOverBorderTransform; } }
+
+        #endregion
+
 
         [Header("Resume Game Countdown Settings")]
         #region Serialized Fields

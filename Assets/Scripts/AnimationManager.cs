@@ -13,15 +13,6 @@ public class AnimationManager : MonoBehaviour
 
     #region Fields
 
-    [Header("Scale Up And Down Animation Settings")]
-    #region Serialized Fields
-
-    [SerializeField][Range(0.1f, 3f)] private float _endScale;
-    [SerializeField][Range(0.025f, 0.2f)] private float _animatonDuration;
-    [SerializeField][Range(2, 10)] private int _animationLoopAmount;
-
-    #endregion
-
     [Header("Color Animation Variables")]
     #region Serialized Fields
 
@@ -40,15 +31,21 @@ public class AnimationManager : MonoBehaviour
         }
     }
 
-    public void ScaleUpAndDownAnimation(GameObject gameobject)
+    public void ScaleUpAndDownAnimation(Transform objectTransform, Vector3 endScale, float animationDuration, int animationLoopAmount)
     { 
-        gameobject.transform.DOScale(_endScale, _animatonDuration).SetLoops(_animationLoopAmount, LoopType.Yoyo);
+        objectTransform.DOScale(endScale, animationDuration).SetLoops(animationLoopAmount, LoopType.Yoyo);
     }
 
-    public void GlowAnimation(GameObject gameobject)
+    public void GlowAnimation(GameObject gameobject, float animationDuration, int animationLoopAmount)
     {
         SpriteRenderer objectRenderer = gameobject.GetComponent<SpriteRenderer>();
-        objectRenderer.DOColor(_glow, _animatonDuration).SetLoops(_animationLoopAmount, LoopType.Yoyo);
+        objectRenderer.DOColor(_glow, animationDuration).SetLoops(animationLoopAmount, LoopType.Yoyo);
+    }
+
+    public void ScaleUpAnimation(Transform objectTransform, Vector3 startingScale, Vector3 endScale, float animationDuration)
+    {
+        objectTransform.localScale = startingScale;
+        objectTransform.DOScale(endScale, animationDuration).SetUpdate(true);
     }
 
 }

@@ -64,6 +64,19 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    [Header("Tutorial Panel Settings")]
+    #region Private Fields
+
+    private CanvasGroup _tutorialPanel;
+
+    #endregion
+
+    [Header("Game Over Panel Animation Settings")]
+    #region Private Fields
+
+    private Transform _objectTransform;
+
+    #endregion
 
     [Header("Music Speed Settings")]
     #region Private Fields
@@ -127,15 +140,6 @@ public class GameManager : MonoBehaviour
     }
 
     #region Private Methods
-    private void StartGame()
-    {
-        _startingShrinkSpeed = _shrinkSpeed;
-        SceneManager.LoadScene(1);
-        AudioManager.Instance.PlayAudio("Game Music");
-        _isGameStarted = true;
-    }
-
-    #endregion
     private void RestartGame()
     {
         GUIManager.Instance.YourNewBestText.alpha = 0;
@@ -151,7 +155,7 @@ public class GameManager : MonoBehaviour
     {
         if (_isGameStarted == false || _isPaused == true)
             return;
-
+           
         _musicTime += Time.deltaTime;
 
         if (_musicTime >= 195f)
@@ -166,11 +170,36 @@ public class GameManager : MonoBehaviour
         _bestTime = PlayerPrefs.GetFloat("BestTime", _bestTime);
     }
 
+    private void LoadScene() 
+    {
+        SceneManager.LoadScene(1);
+        Invoke(nameof(OpenTutorialPanel), 0.01f);
+    }
+
+    private void OpenTutorialPanel()
+    {
+        _tutorialPanel = GameObject.FindWithTag("PANELS/ Tutorial Panel").GetComponent<CanvasGroup>();
+        GUIManager.Instance.ActivateCanvasGroup(_tutorialPanel, true);
+        Time.timeScale = 0;
+    }
+
+    #endregion
+
     #region Public Methods
+
+    public void StartGame()
+    {
+        Time.timeScale = 1;
+        _musicTime = 0;
+        GUIManager.Instance.ActivateCanvasGroup(_tutorialPanel, false);
+        _startingShrinkSpeed = _shrinkSpeed;
+        AudioManager.Instance.PlayAudio("Game Music");
+        _isGameStarted = true;
+    }
 
     public void PlayButton()
     {
-        Invoke(nameof(StartGame), _startGameDelay);
+        Invoke(nameof(LoadScene), _startGameDelay);
         AudioManager.Instance.StopAudio("Menu Music");
     }
 
@@ -200,19 +229,26 @@ public class GameManager : MonoBehaviour
         ShrinkSpeed += speedUp;
     }
 
-    public void PersonalRecord()
-    {
-        if (TimeManager.Instance.CurrentTime > _bestTime)
-        {
-            _bestTime = TimeManager.Instance.CurrentTime;
-            PlayerPrefs.SetFloat("BestTime", _bestTime);
-            GUIManager.Instance.YourNewBestText.alpha = 1;
-        }
-    }
 
     #endregion
 
     #region Coroutines
+
+    #region Private
+    private IEnumerator PersonalRecord()
+    {
+        if (TimeManager.Instance.CurrentTime > _bestTime)
+        {
+            yield return new WaitForSecondsRealtime(1.0f);
+            _bestTime = TimeManager.Instance.CurrentTime;
+            GUIManager.Instance.YourNewBestText.alpha = 1;
+            AnimationManager.Instance.ScaleUpAnimation(GUIManager.Instance.YourNewBestText.transform, Vector3.zero, Vector3.one, 0.3f);
+            AudioManager.Instance.PlayAudio("Congratulations");
+            PlayerPrefs.SetFloat("BestTime", _bestTime);
+        }
+    }
+
+    #endregion
 
     #region Public
 
@@ -224,9 +260,11 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 0f;
         AudioManager.Instance.StopAudio("Game Music");
-        PersonalRecord();
         GUIManager.Instance.GameTimeText();
         GUIManager.Instance.ActivateCanvasGroup(GUIManager.Instance.GameOverPanel, true);
+        AudioManager.Instance.PlayAudio("Game Over");
+        AnimationManager.Instance.ScaleUpAnimation(GUIManager.Instance.GameOverBorderTransform, Vector3.zero, Vector3.one, 1.0f);
+        StartCoroutine(nameof(PersonalRecord));
         _isGameOver = true;
     }
 

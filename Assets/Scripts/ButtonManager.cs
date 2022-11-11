@@ -39,6 +39,11 @@ namespace Managers
             GameManager.Instance.PlayButton();
         }
 
+        public void StartGame()
+        {
+            GameManager.Instance.StartGame();
+        }
+
         public void ExitButton()
         {
             GameManager.Instance.ExitGame();
