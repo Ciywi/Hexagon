@@ -12585,7 +12585,7 @@ MonoBehaviour:
     _loop: 0
     _mixerGroup: {fileID: 7593055697623162265, guid: 1d1a495b1cd2f954fa08fee648f37e2e, type: 2}
   - _name: Game Over
-    _clip: {fileID: 8300000, guid: 5ba496631fd63804bb4ebf5a3662e8e5, type: 3}
+    _clip: {fileID: 8300000, guid: 028c0f63b9bf9ec44b7a7cc45ee6cee1, type: 3}
     _volume: 1
     _pitch: 1
     _loop: 0
