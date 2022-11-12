@@ -94,9 +94,11 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    #region Awake
+    #region Awake and Start
     private void Awake()
     {
+        GetPersonalRecord();
+
         if (Instance == null)
         {
             Instance = this;
@@ -108,16 +110,14 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        GetPersonalRecord();
     }
-
     #endregion
 
     private void Update()
     {
         SpeedUpTheAudio();
 
-        /// Activate On Windows Build
+#if UNITY_STANDALONE_WIN
         if (Input.GetKeyDown(KeyCode.Escape) && _isGameOver == false)
         {
             if (_isPaused == false)
@@ -129,6 +129,16 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(GUIManager.Instance.ResumeGameCountdown());
             }
         }
+
+        if (_isGameStarted == false)
+        {
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) ||
+                Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                StartGame();
+            }
+        }
+#endif
 
         if (_isGameOver)
         {
@@ -149,19 +159,20 @@ public class GameManager : MonoBehaviour
         ShrinkSpeed = _startingShrinkSpeed;
         AudioManager.Instance.RestartAudio("Game Music");
         _isGameOver = false;
+        _musicTime = 0.0f;
     }
 
     private void SpeedUpTheAudio()
     {
-        if (_isGameStarted == false || _isPaused == true)
+        if (_isGameStarted == false || _isPaused == true || _isGameOver == true)
             return;
-           
+
         _musicTime += Time.deltaTime;
 
-        if (_musicTime >= 195f)
+        if (_musicTime >= 135.0f)
         {
             AudioManager.Instance.IncrementAudioPitch("Game Music", 0.1f);
-            _musicTime = 95;
+            _musicTime = 95.0f;
         }
     }
 
@@ -170,7 +181,14 @@ public class GameManager : MonoBehaviour
         _bestTime = PlayerPrefs.GetFloat("BestTime", _bestTime);
     }
 
-    private void LoadScene() 
+    private void SetPersonalRecord()
+    {
+        _bestTime = TimeManager.Instance.CurrentTime;
+        PlayerPrefs.SetFloat("BestTime", _bestTime);
+
+    }
+
+    private void LoadScene()
     {
         SceneManager.LoadScene(1);
         Invoke(nameof(OpenTutorialPanel), 0.01f);
@@ -235,17 +253,12 @@ public class GameManager : MonoBehaviour
     #region Coroutines
 
     #region Private
-    private IEnumerator PersonalRecord()
+    private IEnumerator PersonalRecordAnimation()
     {
-        if (TimeManager.Instance.CurrentTime > _bestTime)
-        {
-            yield return new WaitForSecondsRealtime(1.0f);
-            _bestTime = TimeManager.Instance.CurrentTime;
-            GUIManager.Instance.YourNewBestText.alpha = 1;
-            AnimationManager.Instance.ScaleUpAnimation(GUIManager.Instance.YourNewBestText.transform, Vector3.zero, Vector3.one, 0.3f);
-            AudioManager.Instance.PlayAudio("Congratulations");
-            PlayerPrefs.SetFloat("BestTime", _bestTime);
-        }
+        yield return new WaitForSecondsRealtime(1.0f);
+        GUIManager.Instance.YourNewBestText.alpha = 1;
+        AnimationManager.Instance.ScaleUpAnimation(GUIManager.Instance.YourNewBestText.transform, Vector3.zero, Vector3.one, 0.3f);
+        AudioManager.Instance.PlayAudio("Congratulations");
     }
 
     #endregion
@@ -264,7 +277,13 @@ public class GameManager : MonoBehaviour
         GUIManager.Instance.ActivateCanvasGroup(GUIManager.Instance.GameOverPanel, true);
         AudioManager.Instance.PlayAudio("Game Over");
         AnimationManager.Instance.ScaleUpAnimation(GUIManager.Instance.GameOverBorderTransform, Vector3.zero, Vector3.one, 1.0f);
-        StartCoroutine(nameof(PersonalRecord));
+
+        if (TimeManager.Instance.CurrentTime > _bestTime)
+        {
+            SetPersonalRecord();
+            StartCoroutine(nameof(PersonalRecordAnimation));
+        }
+
         _isGameOver = true;
     }
 

@@ -108,7 +108,7 @@ public class Hexagon : MonoBehaviour
         if (transform.localScale.x <= 0.5f && _resized == true)
         {
             AnimationManager.Instance.GlowAnimation(ReferenceManager.Instance.CenterHexagon, 0.1f, 2);
-            CinemachineCameraShake.Instance.ShakeCamera(1f, 0.5f);
+            CinemachineCameraShake.Instance.ShakeCamera(1.5f, 0.5f);
             Invoke(nameof(ResizerAndRotater), _resizeDelay);
             _resized = false;
         }
