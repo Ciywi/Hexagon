@@ -104,7 +104,7 @@ public class AudioManager : MonoBehaviour
         audio.SoundSource.Play();
     }
 
-    public void DecrementAudioPitch(string audioName, float endPitchValue)
+    public void SetAudioPitch(string audioName, float endPitchValue)
     {
         Sounds audio = Array.Find(_sounds, sound => sound.Name == audioName);
         audio.SoundSource.pitch = endPitchValue;

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Managers
 {
@@ -14,6 +15,7 @@ namespace Managers
 
         #endregion
 
+        AudioManager _audioManager;
 
         #region Awake
 
@@ -52,6 +54,22 @@ namespace Managers
         public void PauseButton()
         {
             GameManager.Instance.PauseGame();
+        }
+
+        public void RestartButton()
+        {
+            GameManager.Instance.RestartGame();
+        }
+
+        public void WatchAdButton()
+        {
+            GameManager.Instance.WatchAdToContinue();
+        }
+
+        public void PlayAudio(string audioName)
+        {
+            _audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
+            _audioManager.PlayAudio(audioName);
         }
     }
 

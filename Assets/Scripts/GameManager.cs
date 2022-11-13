@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using Managers;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -78,6 +79,14 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    [Header("Advertisement Settings")]
+    #region Serialized Fields
+
+    private Button _watchAdButton;
+    public int DieCount { get; set; } = 0;
+
+    #endregion
+
     [Header("Music Speed Settings")]
     #region Private Fields
 
@@ -92,9 +101,15 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+
+
     #endregion
 
+
+
+
     #region Awake and Start
+
     private void Awake()
     {
         GetPersonalRecord();
@@ -111,6 +126,12 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
+    private void Start()
+    {
+        AdManager.Instance.BannerAdvertisement(this, "bannerAndroid");
+    }
+
     #endregion
 
     private void Update()
@@ -140,27 +161,9 @@ public class GameManager : MonoBehaviour
         }
 #endif
 
-        if (_isGameOver)
-        {
-            if (Input.anyKeyDown)
-            {
-                RestartGame();
-            }
-        }
     }
 
     #region Private Methods
-    private void RestartGame()
-    {
-        GUIManager.Instance.YourNewBestText.alpha = 0;
-        GUIManager.Instance.ActivateCanvasGroup(GUIManager.Instance.GameOverPanel, false);
-        SceneManager.LoadScene(1);
-        Time.timeScale = 1.0f;
-        ShrinkSpeed = _startingShrinkSpeed;
-        AudioManager.Instance.RestartAudio("Game Music");
-        _isGameOver = false;
-        _musicTime = 0.0f;
-    }
 
     private void SpeedUpTheAudio()
     {
@@ -191,7 +194,7 @@ public class GameManager : MonoBehaviour
     private void LoadScene()
     {
         SceneManager.LoadScene(1);
-        Invoke(nameof(OpenTutorialPanel), 0.01f);
+        Invoke(nameof(OpenTutorialPanel), 0.1f);
     }
 
     private void OpenTutorialPanel()
@@ -215,6 +218,18 @@ public class GameManager : MonoBehaviour
         _isGameStarted = true;
     }
 
+    public void RestartGame()
+    {
+        GUIManager.Instance.YourNewBestText.alpha = 0;
+        GUIManager.Instance.ActivateCanvasGroup(GUIManager.Instance.GameOverPanel, false);
+        SceneManager.LoadScene(1);
+        Time.timeScale = 1.0f;
+        ShrinkSpeed = _startingShrinkSpeed;
+        AudioManager.Instance.RestartAudio("Game Music");
+        _isGameOver = false;
+        _musicTime = 0.0f;
+    }
+
     public void PlayButton()
     {
         Invoke(nameof(LoadScene), _startGameDelay);
@@ -236,12 +251,26 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.PlayAudio("Game Music");
     }
 
+
     public void ExitGame()
     {
         Application.Quit();
     }
+    public void ContinueGameAfterAD()
+    {
+        Time.timeScale = 1.0f;
+        AudioManager.Instance.SetAudioPitch("Game Music", 1.0f);
+        AudioManager.Instance.PlayAudio("Game Music");
+        _isGameOver = false;
+    }
 
+    public void WatchAdToContinue()
+    {
+        AdManager.Instance.ShowAdvertisement(this, "rewardedVideo");
 
+        _watchAdButton = GameObject.Find("Watch Ad Button").GetComponent<Button>();
+        _watchAdButton.interactable = false;
+    }
     public void ShrinkSpeedUp(float speedUp)
     {
         ShrinkSpeed += speedUp;
@@ -271,16 +300,23 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(2.0f);
 
+        if (DieCount == 4)
+        {
+            AdManager.Instance.ShowAdvertisement(this, "interstitialAndroid");
+            DieCount = 0;
+        }
+
         Time.timeScale = 0f;
-        AudioManager.Instance.StopAudio("Game Music");
-        GUIManager.Instance.GameTimeText();
+        AudioManager.Instance.PauseAudio("Game Music");
+        GUIManager.Instance.GameTimeTextUpdate();
         GUIManager.Instance.ActivateCanvasGroup(GUIManager.Instance.GameOverPanel, true);
         AudioManager.Instance.PlayAudio("Game Over");
         AnimationManager.Instance.ScaleUpAnimation(GUIManager.Instance.GameOverBorderTransform, Vector3.zero, Vector3.one, 1.0f);
-
+       
         if (TimeManager.Instance.CurrentTime > _bestTime)
-        {
+        {            
             SetPersonalRecord();
+            PlayFabManager.Instance.SendLeaderboard((int)_bestTime);
             StartCoroutine(nameof(PersonalRecordAnimation));
         }
 

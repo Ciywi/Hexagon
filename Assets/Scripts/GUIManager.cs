@@ -16,7 +16,9 @@ namespace Managers
 
         #endregion
 
-        [Header("Components")]
+        private AudioManager _audioManager;
+
+        [Header("Pause Menu Settings")]
         #region Serialized Fields
 
         [SerializeField] private CanvasGroup _pauseMenuPanel;
@@ -96,7 +98,7 @@ namespace Managers
 
         #region Public Methods
 
-        public void GameTimeText()
+        public void GameTimeTextUpdate()
         {
             _lastGameTimeText.text = $"You Dodged For \n {TimeManager.Instance.CurrentTime:0.0} Seconds";
             _bestTimeTextOnGUI.text = $"Best Time {GameManager.Instance.BestTime:0.0}";
@@ -120,7 +122,7 @@ namespace Managers
 
         public void StartResumeGameCountdown()
         {
-            StartCoroutine(nameof(ResumeGameCountdown));
+            StartCoroutine(ResumeGameCountdown(_pauseMenuPanel,"ResumeGame"));
         }
 
         #endregion
@@ -129,29 +131,40 @@ namespace Managers
 
         #region Public
 
-        public IEnumerator ResumeGameCountdown()
+        public IEnumerator ResumeGameCountdown(CanvasGroup panelToClose, string methodToCall)
         {
+            _audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
             int i = 3;
 
-            _resumeGameCountdownText.color = Color.green;
+            _audioManager.PlayAudio("Countdown");
             _resumeGameCountdownText.text = $"{i}";
-            ActivateCanvasGroup(PauseMenuPanel, false);
+            _resumeGameCountdownText.color = Color.green;
+            ActivateCanvasGroup(panelToClose, false);
             ActivateCanvasGroup(_resumeGameCountdownPanel, true);
 
             yield return new WaitForSecondsRealtime(1);
             i--;
+            _audioManager.PlayAudio("Countdown");
             _resumeGameCountdownText.text = $"{i}";
             _resumeGameCountdownText.color = Color.yellow;
 
             yield return new WaitForSecondsRealtime(1);
             i--;
+            _audioManager.PlayAudio("Countdown");
             _resumeGameCountdownText.text = $"{i}";
             _resumeGameCountdownText.color = Color.red;
 
             yield return new WaitForSecondsRealtime(1);
             ActivateCanvasGroup(_resumeGameCountdownPanel, false);
 
-            GameManager.Instance.ResumeGame();
+            if (methodToCall == "ResumeGame")
+            {
+                GameManager.Instance.ResumeGame();
+            }
+            if (methodToCall == "ContinueGameAfterAD")
+            {
+                GameManager.Instance.ContinueGameAfterAD();
+            }
 
         }
 
