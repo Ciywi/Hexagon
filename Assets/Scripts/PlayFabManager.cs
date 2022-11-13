@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
+using TMPro;
 
 namespace Managers
 {
@@ -16,11 +17,21 @@ namespace Managers
 
         #endregion
 
+        [Header("Leaderboard Settings")]
+        #region Serialized Fields
+
+        [SerializeField] private GameObject _rowPrefab;
+        [SerializeField] private Transform _scoresPanel;
+
+        [SerializeField] private Color[] _textColors;
+        #endregion
 
         #region Awake and Start
 
         void Awake()
         {
+            Login();
+
             if (Instance != null && Instance != this)
             {
                 Destroy(gameObject);
@@ -30,13 +41,11 @@ namespace Managers
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
             }
-
-
         }
 
         void Start()
         {
-            Login();
+
         }
 
         #endregion
@@ -55,6 +64,7 @@ namespace Managers
 
         private void OnSuccess(LoginResult result)
         {
+            GetLeaderboard();
             Debug.Log("Successful login/account create!");
         }
 
@@ -67,6 +77,48 @@ namespace Managers
         private void OnLeaderboardUpdate(UpdatePlayerStatisticsResult result)
         {
             Debug.Log("Succesfull leaderboard sent");
+        }
+
+        private void OnLeaderboardGet(GetLeaderboardResult result)
+        {
+            foreach (Transform item in _scoresPanel)
+            {
+                Destroy(item.gameObject);
+            }
+
+            foreach (var item in result.Leaderboard)
+            {
+                GameObject newRow = Instantiate(_rowPrefab, _scoresPanel);
+                TextMeshProUGUI[] texts = newRow.GetComponentsInChildren<TextMeshProUGUI>();
+
+                texts[0].text = $"{item.Position + 1}.";
+                texts[1].text = item.PlayFabId;
+                texts[2].text = item.StatValue.ToString();
+
+                if (item.Position == 0)
+                {
+                    for (int i = 0; i < texts.Length; i++)
+                    {
+                        texts[i].color = _textColors[0];
+                    }
+                }
+                if (item.Position == 1)
+                {
+                    for (int i = 0; i < texts.Length; i++)
+                    {
+                        texts[i].color = _textColors[1];
+                    }
+                }
+                if (item.Position == 2)
+                {
+                    for (int i = 0; i < texts.Length; i++)
+                    {
+                        texts[i].color = _textColors[2];
+                    }
+                }
+
+                Debug.Log($"Rank: {item.Position}  Name: {item.PlayFabId}  Time: {item.StatValue}");
+            }
         }
 
         #endregion
@@ -87,6 +139,17 @@ namespace Managers
                 }
             };
             PlayFabClientAPI.UpdatePlayerStatistics(request, OnLeaderboardUpdate, OnError);
+        }
+
+        public void GetLeaderboard()
+        {
+            var request = new GetLeaderboardRequest
+            {
+                StatisticName = "Best Survive Time",
+                StartPosition = 0,
+                MaxResultsCount = 10
+            };
+            PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardGet, OnError);
         }
 
         #endregion
