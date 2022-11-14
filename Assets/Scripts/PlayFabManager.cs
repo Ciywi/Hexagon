@@ -5,6 +5,7 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using TMPro;
+using Unity.VisualScripting;
 
 namespace Managers
 {
@@ -32,6 +33,9 @@ namespace Managers
 
         [SerializeField] private CanvasGroup _setUsernamePanel;
         [SerializeField] private TMP_InputField _nameInput;
+        [SerializeField] private TextMeshProUGUI _cantBeUsedText;
+        [SerializeField] private Color[] _cantBeUsedTextColor;
+        [SerializeField] private List<string> _bannedWords = new List<string>();
 
         #endregion
 
@@ -39,8 +43,6 @@ namespace Managers
 
         void Awake()
         {
-            Login();
-
             if (Instance != null && Instance != this)
             {
                 Destroy(gameObject);
@@ -50,6 +52,11 @@ namespace Managers
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
             }
+        }
+
+        private void Start()
+        {
+            Login();
         }
 
         #endregion
@@ -184,11 +191,32 @@ namespace Managers
 
         public void SubmitNameRequest()
         {
-            var request = new UpdateUserTitleDisplayNameRequest
+            if (_bannedWords.Contains(_nameInput.text))
             {
-                DisplayName = _nameInput.text
-            };
-            PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnError);
+                StartCoroutine(CantBeUsedTextShown());
+                return;
+            }
+            else
+            {
+                var request = new UpdateUserTitleDisplayNameRequest
+                {
+                    DisplayName = _nameInput.text
+                };
+                PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnError);
+            }
+        }
+
+        #endregion
+
+        #region Coroutines
+
+        private IEnumerator CantBeUsedTextShown()
+        {
+            _cantBeUsedText.color = _cantBeUsedTextColor[0];
+
+            yield return new WaitForSeconds(2f);
+
+            _cantBeUsedText.color = _cantBeUsedTextColor[1];
         }
 
         #endregion
