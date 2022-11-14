@@ -31,6 +31,7 @@ namespace Managers
         [Header("Create Username Settings")]
         #region Serialized Fields
 
+        [SerializeField] private GameObject _loadingPanel;
         [SerializeField] private CanvasGroup _setUsernamePanel;
         [SerializeField] private TMP_InputField _nameInput;
         [SerializeField] private TextMeshProUGUI _cantBeUsedText;
@@ -65,6 +66,8 @@ namespace Managers
 
         private void Login()
         {
+            _loadingPanel.SetActive(true);
+
             var request = new LoginWithCustomIDRequest
             {
                 CustomId = "New User",
@@ -86,10 +89,12 @@ namespace Managers
 
             if (name == null)
             {
+                _loadingPanel.SetActive(false);
                 UIManager.Instance.ActivateCanvasGroup(_setUsernamePanel, true);
             }
             else
             {
+                _loadingPanel.SetActive(false);
                 UIManager.Instance.ActivateCanvasGroup(_setUsernamePanel, false);
             }
 
