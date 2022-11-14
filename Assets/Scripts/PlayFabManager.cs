@@ -70,7 +70,7 @@ namespace Managers
 
             var request = new LoginWithCustomIDRequest
             {
-                CustomId = "New User",
+                CustomId = SystemInfo.deviceUniqueIdentifier,
                 CreateAccount = true,
                 InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
                 {
@@ -201,14 +201,12 @@ namespace Managers
                 StartCoroutine(CantBeUsedTextShown());
                 return;
             }
-            else
+
+            var request = new UpdateUserTitleDisplayNameRequest
             {
-                var request = new UpdateUserTitleDisplayNameRequest
-                {
-                    DisplayName = _nameInput.text
-                };
-                PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnError);
-            }
+                DisplayName = _nameInput.text
+            };
+            PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnError);
         }
 
         #endregion
