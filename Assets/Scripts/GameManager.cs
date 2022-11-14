@@ -34,6 +34,13 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    [Header("Pause Settings")]
+    #region Private Fields
+
+    private Button _pauseButton;
+
+    #endregion
+
     [Header("Best Time Settings")]
     #region Private Fields
 
@@ -295,6 +302,9 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator GameOver()
     {
+        _pauseButton = GameObject.Find("Pause Button").GetComponent<Button>();
+        _pauseButton.interactable = false;
+
         Time.timeScale = 0.2f;
 
         yield return new WaitForSecondsRealtime(2.0f);
@@ -320,6 +330,7 @@ public class GameManager : MonoBehaviour
         }
 
         _isGameOver = true;
+        _pauseButton.interactable = true;
     }
 
     #endregion
