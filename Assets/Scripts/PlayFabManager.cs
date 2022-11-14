@@ -24,9 +24,18 @@ namespace Managers
         [SerializeField] private Transform _scoresPanel;
 
         [SerializeField] private Color[] _textColors;
+
         #endregion
 
-        #region Awake and Start
+        [Header("Create Username Settings")]
+        #region Serialized Fields
+
+        [SerializeField] private CanvasGroup _setUsernamePanel;
+        [SerializeField] private TMP_InputField _nameInput;
+
+        #endregion
+
+        #region Awake
 
         void Awake()
         {
@@ -43,11 +52,6 @@ namespace Managers
             }
         }
 
-        void Start()
-        {
-
-        }
-
         #endregion
 
         #region Private Methods
@@ -56,21 +60,41 @@ namespace Managers
         {
             var request = new LoginWithCustomIDRequest
             {
-                CustomId = SystemInfo.deviceUniqueIdentifier,
-                CreateAccount = true
+                CustomId = "New User",
+                CreateAccount = true,
+                InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
+                {
+                    GetPlayerProfile = true
+                }
             };
-            PlayFabClientAPI.LoginWithCustomID(request, OnSuccess, OnError);
+            PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnError);
         }
 
-        private void OnSuccess(LoginResult result)
+        private void OnLoginSuccess(LoginResult result)
         {
+            string name = null;
+
+            if (result.InfoResultPayload.PlayerProfile != null)
+                name = result.InfoResultPayload.PlayerProfile.DisplayName;
+
+            if (name == null)
+            {
+                UIManager.Instance.ActivateCanvasGroup(_setUsernamePanel, true);
+            }
+            else
+            {
+                UIManager.Instance.ActivateCanvasGroup(_setUsernamePanel, false);
+            }
+
+
             GetLeaderboard();
-            Debug.Log("Successful login/account create!");
+            Debug.Log($"Successful login/account create");
+            Debug.Log($"Welcome Back {name}");
         }
 
         private void OnError(PlayFabError error)
         {
-            Debug.Log("On Backend!");
+            Debug.Log("Error On Backend!");
             Debug.Log(error.GenerateErrorReport());
         }
 
@@ -92,7 +116,7 @@ namespace Managers
                 TextMeshProUGUI[] texts = newRow.GetComponentsInChildren<TextMeshProUGUI>();
 
                 texts[0].text = $"{item.Position + 1}.";
-                texts[1].text = item.PlayFabId;
+                texts[1].text = item.Profile.DisplayName;
                 texts[2].text = item.StatValue.ToString();
 
                 if (item.Position == 0)
@@ -117,8 +141,14 @@ namespace Managers
                     }
                 }
 
-                Debug.Log($"Rank: {item.Position}  Name: {item.PlayFabId}  Time: {item.StatValue}");
+                Debug.Log($"Rank: {item.Position}  Name: {item.DisplayName}  Time: {item.StatValue}");
             }
+        }
+
+        private void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result)
+        {
+            Debug.Log("Username Updated!");
+            UIManager.Instance.ActivateCanvasGroup(_setUsernamePanel, false);
         }
 
         #endregion
@@ -150,6 +180,15 @@ namespace Managers
                 MaxResultsCount = 10
             };
             PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardGet, OnError);
+        }
+
+        public void SubmitNameRequest()
+        {
+            var request = new UpdateUserTitleDisplayNameRequest
+            {
+                DisplayName = _nameInput.text
+            };
+            PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnError);
         }
 
         #endregion

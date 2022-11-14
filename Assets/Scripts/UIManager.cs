@@ -65,6 +65,22 @@ namespace Managers
             _settingCanvas.interactable = _settingsToggle.isOn;
         }
 
+        public void ActivateCanvasGroup(CanvasGroup canvasGroup, bool activate)
+        {
+            if (activate == true)
+            {
+                canvasGroup.alpha = 1;
+            }
+            else
+            {
+                canvasGroup.alpha = 0;
+            }
+
+            canvasGroup.blocksRaycasts = activate;
+            canvasGroup.interactable = activate;
+
+        }
+
         #endregion
     }
 
