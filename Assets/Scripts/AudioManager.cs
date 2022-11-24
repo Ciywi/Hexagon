@@ -119,6 +119,7 @@ public class AudioManager : MonoBehaviour
     public void SetVolume(string mixerName)
     {
         AudioSettings audioSettings = Array.Find(_audioSettings, audioSettings => audioSettings.VolumeName == mixerName);
+        //audioSettings.Slider = GameObject.Find(mixerName).GetComponent<BetterSlider>();
 
         float volume = audioSettings.Slider.value;
 

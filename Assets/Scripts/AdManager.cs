@@ -17,7 +17,7 @@ namespace Managers
 
         private GameManager gameManager;
 
-        private bool _testMode = true;
+        private bool _testMode = false;
         private string _androidGameId = "5018066";
 
         private CanvasGroup _gameOverPanel;
@@ -36,9 +36,8 @@ namespace Managers
                 DontDestroyOnLoad(gameObject);
 
                 Advertisement.AddListener(this);
-                Advertisement.Initialize(_androidGameId, _testMode);
+                Advertisement.Initialize(_androidGameId);
             }
-            
         }
 
         #endregion

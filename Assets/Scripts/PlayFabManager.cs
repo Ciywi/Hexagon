@@ -201,6 +201,10 @@ namespace Managers
                 StartCoroutine(CantBeUsedTextShown());
                 return;
             }
+            if (_nameInput.text == null)
+            {
+                return;
+            }
 
             var request = new UpdateUserTitleDisplayNameRequest
             {
