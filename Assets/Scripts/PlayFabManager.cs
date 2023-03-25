@@ -42,7 +42,7 @@ namespace Managers
 
         #region Awake
 
-        void Awake()
+        private void Awake()
         {
             if (Instance != null && Instance != this)
             {

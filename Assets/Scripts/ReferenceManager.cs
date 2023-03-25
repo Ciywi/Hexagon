@@ -31,7 +31,7 @@ namespace Managers
 
         #region Awake and Start
 
-        void Awake()
+        private void Awake()
         {
             if (Instance == null)
             {

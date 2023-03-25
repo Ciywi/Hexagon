@@ -51,7 +51,7 @@ public class SpawnManager : MonoBehaviour
         SpawnHexagon();
     }
 
-    void SpawnHexagon()
+    private void SpawnHexagon()
     {
         if (_currentHexagonAmount < _maxHexagonAmount && Time.time >= _nextSpawnTime)
         {

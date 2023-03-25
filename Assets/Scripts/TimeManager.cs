@@ -80,6 +80,14 @@ public class TimeManager : MonoBehaviour
     #endregion
 
 
+    [Header("Timer Visualization Settings")]
+    #region Serialized Fields
+
+    [SerializeField] private bool _changeTimerColor;
+    [SerializeField] private int _lastTimes = 10;
+
+    #endregion
+
     #endregion
 
     #region Awake and Start
@@ -103,8 +111,12 @@ public class TimeManager : MonoBehaviour
     #region Update
     void Update()
     {
-        TimerTextColorChanger();
         TimerCountdownOrUp();
+
+        if (_isCountdown && _changeTimerColor)
+        {
+            TimerTextColorChanger();
+        }
 
         if (_hasLimit)
         {
@@ -153,20 +165,17 @@ public class TimeManager : MonoBehaviour
 
     void TimerTextColorChanger()
     {
-        if (_isCountdown)
+        if (_currentTime > _startingTime / 2)
         {
-            if (_currentTime > _startingTime / 2 && _currentTime > 10)
-            {
-                _timerText.color = Color.green;
-            }
-            else if (_currentTime <= _startingTime / 2 && _currentTime > 10)
-            {
-                _timerText.color = Color.yellow;
-            }
-            else if (_currentTime <= 10)
-            {
-                _timerText.color = Color.red;
-            }
+            _timerText.color = Color.green;
+        }
+        else if (_currentTime <= _startingTime / 2 && _currentTime > _lastTimes)
+        {
+            _timerText.color = Color.yellow;
+        }
+        else if (_currentTime <= _lastTimes)
+        {
+            _timerText.color = Color.red;
         }
     }
 

@@ -17,6 +17,7 @@ public class Hexagon : MonoBehaviour
 
     private Rigidbody2D _hexagonRigidbody;
     private LineRenderer _hexagonLineRenderer;
+    [SerializeField] private ParticleSystem _hitParticles;
 
     #endregion
 
@@ -84,9 +85,9 @@ public class Hexagon : MonoBehaviour
             Instance = this;
         }
 
-        _hexagonRigidbody = GetComponent<Rigidbody2D>();
-        _hexagonLineRenderer = GetComponent<LineRenderer>();
+        AssignComponents();
     }
+
 
     private void Start()
     {
@@ -95,13 +96,21 @@ public class Hexagon : MonoBehaviour
         transform.localScale = Vector3.one * _startingSize;
         _colorArrayLength = _lerpColors.Length;
     }
-    void Update()
+    private void Update()
     {
         Shrink();
         ColorLerp(_hexagonLineRenderer);
     }
 
-    void Shrink()
+
+    #region Private Methods
+    private void AssignComponents()
+    {
+        _hexagonRigidbody = GetComponent<Rigidbody2D>();
+        _hexagonLineRenderer = GetComponent<LineRenderer>();
+    }
+
+    private void Shrink()
     {
         transform.localScale -= Vector3.one * GameManager.Instance.ShrinkSpeed * Time.deltaTime;
 
@@ -114,9 +123,7 @@ public class Hexagon : MonoBehaviour
         }
     }
 
-    #region Private Methods
-
-    void SetRotations()
+    private void SetRotations()
     {
         int angle = 0;
 
@@ -127,17 +134,11 @@ public class Hexagon : MonoBehaviour
         }
     }
 
-    void RotationRandomizer()
+    private void RotationRandomizer()
     {
         int i = Random.Range(0, _rotations.Length - 1);
 
         _hexagonRigidbody.rotation = _rotations[i];
-    }
-
-
-    public void SetMaterialColor(LineRenderer renderer, Color newColor)
-    {
-        renderer.material.color = newColor;
     }
 
     private void ResizerAndRotater()
@@ -162,6 +163,26 @@ public class Hexagon : MonoBehaviour
         }
     }
 
+    private void OnPlayerHitHexagon()
+    {
+        AudioManager.Instance.PlayAudio("Hexagon Hit Sound Effect");
+        _hitParticles.Play();
+        SetMaterialColor(_hexagonLineRenderer, _red);
+        AudioManager.Instance.SetAudioPitch("Game Music", 0.8f);
+        StartCoroutine(GameManager.Instance.GameOver());
+        CinemachineCameraShake.Instance.ShakeCamera(6, 0.20f);
+        GameManager.Instance.DieCount++;
+    }
+
+    #endregion
+
+    #region Public Methods
+
+    public void SetMaterialColor(LineRenderer renderer, Color newColor)
+    {
+        renderer.material.color = newColor;
+    }
+
     #endregion
 
     #region Triggers
@@ -170,14 +191,10 @@ public class Hexagon : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            AudioManager.Instance.PlayAudio("Hexagon Hit Sound Effect");
-            SetMaterialColor(_hexagonLineRenderer, _red);
-            AudioManager.Instance.SetAudioPitch("Game Music", 0.8f);
-            StartCoroutine(GameManager.Instance.GameOver());
-            CinemachineCameraShake.Instance.ShakeCamera(6, 0.20f);
-            GameManager.Instance.DieCount++;
+            OnPlayerHitHexagon();
         }
     }
+
 
     #endregion
 }

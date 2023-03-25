@@ -130,7 +130,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
     }
 
     private void Start()

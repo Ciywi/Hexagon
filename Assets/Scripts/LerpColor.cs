@@ -35,7 +35,7 @@ public class LerpColor : MonoBehaviour
 
     #region Awake and Start
 
-    void Awake()
+    private void Awake()
     {
         _colorArrayLength = _lerpColors.Length;
         _gameObjectText = GetComponent<TextMeshProUGUI>();

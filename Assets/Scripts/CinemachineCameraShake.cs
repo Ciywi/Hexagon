@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
@@ -7,7 +5,9 @@ public class CinemachineCameraShake : MonoBehaviour
 {
     #region Instance
 
-    public static CinemachineCameraShake Instance;
+    private static CinemachineCameraShake _instance;
+
+    public static CinemachineCameraShake Instance { get { return _instance; } }
 
     #endregion
 
@@ -20,7 +20,7 @@ public class CinemachineCameraShake : MonoBehaviour
 
     #endregion
 
-    [Header("ShakeSettings")]
+    [Header("Shake Settings")]
     #region Private Fields
 
     private float _shakeTimer;
@@ -31,14 +31,20 @@ public class CinemachineCameraShake : MonoBehaviour
 
     #region Awake and Start
 
-    void Awake()
+    private void Awake()
     {
         _cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
 
-        if (Instance == null)
+        if (_instance == null)
         {
-            Instance = this;
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
+
     }
 
     #endregion
@@ -46,7 +52,7 @@ public class CinemachineCameraShake : MonoBehaviour
 
     #region Update and FixedUpdate
 
-    void Update()
+    private void Update()
     {
         StopCameraShake();
     }

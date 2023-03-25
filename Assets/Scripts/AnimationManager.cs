@@ -35,7 +35,6 @@ public class AnimationManager : MonoBehaviour
     { 
         objectTransform.DOScale(endScale, animationDuration).SetLoops(animationLoopAmount, LoopType.Yoyo);
     }
-
     public void GlowAnimation(GameObject gameobject, float animationDuration, int animationLoopAmount)
     {
         SpriteRenderer objectRenderer = gameobject.GetComponent<SpriteRenderer>();
