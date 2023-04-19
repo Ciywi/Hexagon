@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using DG.Tweening;
 using Managers;
+using UnityEngine;
 
 public class Hexagon : MonoBehaviour
 {
@@ -78,8 +75,7 @@ public class Hexagon : MonoBehaviour
 
     #endregion
 
-    private void Awake()
-    {
+    private void Awake() {
         if (Instance == null)
         {
             Instance = this;
@@ -89,29 +85,25 @@ public class Hexagon : MonoBehaviour
     }
 
 
-    private void Start()
-    {
+    private void Start() {
         SetRotations();
         RotationRandomizer();
         transform.localScale = Vector3.one * _startingSize;
         _colorArrayLength = _lerpColors.Length;
     }
-    private void Update()
-    {
+    private void Update() {
         Shrink();
         ColorLerp(_hexagonLineRenderer);
     }
 
 
     #region Private Methods
-    private void AssignComponents()
-    {
+    private void AssignComponents() {
         _hexagonRigidbody = GetComponent<Rigidbody2D>();
         _hexagonLineRenderer = GetComponent<LineRenderer>();
     }
 
-    private void Shrink()
-    {
+    private void Shrink() {
         transform.localScale -= Vector3.one * GameManager.Instance.ShrinkSpeed * Time.deltaTime;
 
         if (transform.localScale.x <= 0.5f && _resized == true)
@@ -123,8 +115,7 @@ public class Hexagon : MonoBehaviour
         }
     }
 
-    private void SetRotations()
-    {
+    private void SetRotations() {
         int angle = 0;
 
         for (int i = 0; i < _rotations.Length; i++)
@@ -134,23 +125,20 @@ public class Hexagon : MonoBehaviour
         }
     }
 
-    private void RotationRandomizer()
-    {
+    private void RotationRandomizer() {
         int i = Random.Range(0, _rotations.Length - 1);
 
         _hexagonRigidbody.rotation = _rotations[i];
     }
 
-    private void ResizerAndRotater()
-    {
+    private void ResizerAndRotater() {
         transform.localScale = Vector3.one * _startingSize;
         RotationRandomizer();
         GameManager.Instance.ShrinkSpeedUp(0.05f);
         _resized = true;
     }
 
-    private void  ColorLerp(LineRenderer renderer)
-    {
+    private void ColorLerp(LineRenderer renderer) {
         renderer.material.color = Color.Lerp(renderer.material.color, _lerpColors[_colorIndex], _lerpTime * Time.deltaTime);
 
         _timeToLerp = Mathf.Lerp(_timeToLerp, 1f, _lerpTime * Time.deltaTime);
@@ -163,8 +151,7 @@ public class Hexagon : MonoBehaviour
         }
     }
 
-    private void OnPlayerHitHexagon()
-    {
+    private void OnPlayerHitHexagon() {
         AudioManager.Instance.PlayAudio("Hexagon Hit Sound Effect");
         _hitParticles.Play();
         SetMaterialColor(_hexagonLineRenderer, _red);
@@ -178,8 +165,7 @@ public class Hexagon : MonoBehaviour
 
     #region Public Methods
 
-    public void SetMaterialColor(LineRenderer renderer, Color newColor)
-    {
+    public void SetMaterialColor(LineRenderer renderer, Color newColor) {
         renderer.material.color = newColor;
     }
 
@@ -187,8 +173,7 @@ public class Hexagon : MonoBehaviour
 
     #region Triggers
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
+    private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Player"))
         {
             OnPlayerHitHexagon();

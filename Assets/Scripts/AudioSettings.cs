@@ -1,6 +1,5 @@
 using Nojumpo.ScriptableObjects;
 using System;
-using TheraBytes.BetterUi;
 using UnityEngine;
 using UnityEngine.Audio;
 

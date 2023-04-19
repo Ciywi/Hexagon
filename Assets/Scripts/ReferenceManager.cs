@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Managers
@@ -31,8 +28,7 @@ namespace Managers
 
         #region Awake and Start
 
-        private void Awake()
-        {
+        private void Awake() {
             if (Instance == null)
             {
                 Instance = this;

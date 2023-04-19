@@ -1,10 +1,8 @@
+using Managers;
+using Nojumpo;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using DG.Tweening;
-using Managers;
-using TMPro;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -75,7 +73,7 @@ public class GameManager : MonoBehaviour
     [Header("Tutorial Panel Settings")]
     #region Private Fields
 
-    private CanvasGroup _tutorialPanel;
+    private GameObject _tutorialPanel;
 
     #endregion
 
@@ -116,8 +114,7 @@ public class GameManager : MonoBehaviour
 
     #region Awake and Start
 
-    private void Awake()
-    {
+    private void Awake() {
         GetPersonalRecord();
 
         if (Instance == null)
@@ -132,15 +129,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
+    private void Start() {
         AdManager.Instance.BannerAdvertisement(this, "bannerAndroid");
     }
 
     #endregion
 
-    private void Update()
-    {
+    private void Update() {
         SpeedUpTheAudio();
 
 #if UNITY_STANDALONE_WIN
@@ -149,10 +144,6 @@ public class GameManager : MonoBehaviour
             if (_isPaused == false)
             {
                 PauseGame();
-            }
-            else if (_isPaused == true)
-            {
-                StartCoroutine(GUIManager.Instance.ResumeGameCountdown());
             }
         }
 
@@ -170,8 +161,7 @@ public class GameManager : MonoBehaviour
 
     #region Private Methods
 
-    private void SpeedUpTheAudio()
-    {
+    private void SpeedUpTheAudio() {
         if (_isGameStarted == false || _isPaused == true || _isGameOver == true)
             return;
 
@@ -184,28 +174,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void GetPersonalRecord()
-    {
+    private void GetPersonalRecord() {
         _bestTime = PlayerPrefs.GetFloat("BestTime", _bestTime);
     }
 
-    private void SetPersonalRecord()
-    {
+    private void SetPersonalRecord() {
         _bestTime = TimeManager.Instance.CurrentTime;
         PlayerPrefs.SetFloat("BestTime", _bestTime);
 
     }
 
-    private void LoadScene()
-    {
+    private void LoadScene() {
         SceneManager.LoadScene(1);
         Invoke(nameof(OpenTutorialPanel), 0.1f);
     }
 
-    private void OpenTutorialPanel()
-    {
-        _tutorialPanel = GameObject.FindWithTag("PANELS/ Tutorial Panel").GetComponent<CanvasGroup>();
-        GUIManager.Instance.ActivateCanvasGroup(_tutorialPanel, true);
+    private void OpenTutorialPanel() {
+        TutorialPanel tutorialPanel = FindObjectOfType<TutorialPanel>(true);
+        _tutorialPanel = tutorialPanel.gameObject;
+        _tutorialPanel.SetActive(true);
         Time.timeScale = 0;
     }
 
@@ -213,20 +200,18 @@ public class GameManager : MonoBehaviour
 
     #region Public Methods
 
-    public void StartGame()
-    {
+    public void StartGame() {
         Time.timeScale = 1;
         _musicTime = 0;
-        GUIManager.Instance.ActivateCanvasGroup(_tutorialPanel, false);
+        _tutorialPanel.SetActive(false);
         _startingShrinkSpeed = _shrinkSpeed;
         AudioManager.Instance.PlayAudio("Game Music");
         _isGameStarted = true;
     }
 
-    public void RestartGame()
-    {
+    public void RestartGame() {
         GUIManager.Instance.YourNewBestText.alpha = 0;
-        GUIManager.Instance.ActivateCanvasGroup(GUIManager.Instance.GameOverPanel, false);
+        GUIManager.Instance.GameOverPanel.SetActive(false);
         SceneManager.LoadScene(1);
         Time.timeScale = 1.0f;
         ShrinkSpeed = _startingShrinkSpeed;
@@ -235,49 +220,42 @@ public class GameManager : MonoBehaviour
         _musicTime = 0.0f;
     }
 
-    public void PlayButton()
-    {
+    public void PlayButton() {
         Invoke(nameof(LoadScene), _startGameDelay);
         AudioManager.Instance.StopAudio("Menu Music");
     }
 
-    public void PauseGame()
-    {
+    public void PauseGame() {
         Time.timeScale = 0.0f;
         _isPaused = true;
-        GUIManager.Instance.ActivateCanvasGroup(GUIManager.Instance.PauseMenuPanel, true);
+        GUIManager.Instance.PauseMenuPanel.SetActive(true);
         AudioManager.Instance.PauseAudio("Game Music");
     }
 
-    public void ResumeGame()
-    {
+    public void ResumeGame() {
         Time.timeScale = 1.0f;
         _isPaused = false;
         AudioManager.Instance.PlayAudio("Game Music");
     }
 
 
-    public void ExitGame()
-    {
+    public void ExitGame() {
         Application.Quit();
     }
-    public void ContinueGameAfterAD()
-    {
+    public void ContinueGameAfterAD() {
         Time.timeScale = 1.0f;
         AudioManager.Instance.SetAudioPitch("Game Music", 1.0f);
         AudioManager.Instance.PlayAudio("Game Music");
         _isGameOver = false;
     }
 
-    public void WatchAdToContinue()
-    {
+    public void WatchAdToContinue() {
         AdManager.Instance.ShowAdvertisement(this, "rewardedVideo");
 
         _watchAdButton = GameObject.Find("Watch Ad Button").GetComponent<Button>();
         _watchAdButton.interactable = false;
     }
-    public void ShrinkSpeedUp(float speedUp)
-    {
+    public void ShrinkSpeedUp(float speedUp) {
         ShrinkSpeed += speedUp;
     }
 
@@ -287,8 +265,7 @@ public class GameManager : MonoBehaviour
     #region Coroutines
 
     #region Private
-    private IEnumerator PersonalRecordAnimation()
-    {
+    private IEnumerator PersonalRecordAnimation() {
         yield return new WaitForSecondsRealtime(1.0f);
         GUIManager.Instance.YourNewBestText.alpha = 1;
         AnimationManager.Instance.ScaleUpAnimation(GUIManager.Instance.YourNewBestText.transform, Vector3.zero, Vector3.one, 0.3f);
@@ -299,8 +276,7 @@ public class GameManager : MonoBehaviour
 
     #region Public
 
-    public IEnumerator GameOver()
-    {
+    public IEnumerator GameOver() {
         _pauseButton = GameObject.Find("Pause Button").GetComponent<Button>();
         _pauseButton.interactable = false;
 
@@ -317,12 +293,12 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         AudioManager.Instance.PauseAudio("Game Music");
         GUIManager.Instance.GameTimeTextUpdate();
-        GUIManager.Instance.ActivateCanvasGroup(GUIManager.Instance.GameOverPanel, true);
+        GUIManager.Instance.GameOverPanel.SetActive(true);
         AudioManager.Instance.PlayAudio("Game Over");
         AnimationManager.Instance.ScaleUpAnimation(GUIManager.Instance.GameOverBorderTransform, Vector3.zero, Vector3.one, 1.0f);
-       
+
         if (TimeManager.Instance.CurrentTime > _bestTime)
-        {            
+        {
             SetPersonalRecord();
             PlayFabManager.Instance.SendLeaderboard((int)_bestTime);
             StartCoroutine(nameof(PersonalRecordAnimation));

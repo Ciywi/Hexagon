@@ -1,5 +1,5 @@
-using UnityEngine;
 using Cinemachine;
+using UnityEngine;
 
 public class CinemachineCameraShake : MonoBehaviour
 {
@@ -31,8 +31,7 @@ public class CinemachineCameraShake : MonoBehaviour
 
     #region Awake and Start
 
-    private void Awake()
-    {
+    private void Awake() {
         _cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
 
         if (_instance == null)
@@ -52,8 +51,7 @@ public class CinemachineCameraShake : MonoBehaviour
 
     #region Update and FixedUpdate
 
-    private void Update()
-    {
+    private void Update() {
         StopCameraShake();
     }
 
@@ -63,8 +61,7 @@ public class CinemachineCameraShake : MonoBehaviour
 
     #region Private Methods
 
-    private void StopCameraShake()
-    {
+    private void StopCameraShake() {
         if (_shakeTimer > 0f)
         {
             _shakeTimer -= Time.deltaTime;
@@ -81,9 +78,8 @@ public class CinemachineCameraShake : MonoBehaviour
 
     #region Public Methods
 
-    public void ShakeCamera(float intensity, float time)
-    {
-        CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin 
+    public void ShakeCamera(float intensity, float time) {
+        CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin
             = _cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;

@@ -20,7 +20,7 @@ namespace Managers
         private bool _testMode = false;
         private string _androidGameId = "5018066";
 
-        private CanvasGroup _gameOverPanel;
+        private GameObject _gameOverPanel;
 
         #region Awake and Start
 
@@ -54,7 +54,7 @@ namespace Managers
             switch (showResult)
             {
                 case ShowResult.Finished:
-                    _gameOverPanel = GameObject.Find("Game Over Panel").GetComponent<CanvasGroup>();
+                    _gameOverPanel = GameObject.Find("Game Over Panel");
                     GUIManager.Instance.StartCoroutine(GUIManager.Instance.ResumeGameCountdown(_gameOverPanel, "ContinueGameAfterAD"));
                     break;
                 case ShowResult.Skipped:

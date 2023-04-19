@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
@@ -39,20 +37,17 @@ public class SpawnManager : MonoBehaviour
     #endregion
 
 
-    private void Awake()
-    {
+    private void Awake() {
         if (Instance == null)
         {
             Instance = this;
         }
     }
-    private void Update()
-    {
+    private void Update() {
         SpawnHexagon();
     }
 
-    private void SpawnHexagon()
-    {
+    private void SpawnHexagon() {
         if (_currentHexagonAmount < _maxHexagonAmount && Time.time >= _nextSpawnTime)
         {
             Instantiate(_hexagonPrefab, Vector3.zero, Quaternion.identity);

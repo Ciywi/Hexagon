@@ -1107,7 +1107,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1780252055}
   m_Lens:
     FieldOfView: 34
-    OrthographicSize: 10
+    OrthographicSize: 15.6707
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -1835,7 +1835,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &435511042
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1922,7 +1922,7 @@ GameObject:
   - component: {fileID: 474943587}
   - component: {fileID: 474943586}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Settings Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2548,7 +2548,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 15.679687
+  orthographic size: 15.674714
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3274,10 +3274,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a8944e0c751b56459c0978ae1f42f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pauseMenuPanel: {fileID: 435511043}
-  _gameOverPanel: {fileID: 1394642166}
+  _pauseMenuPanel: {fileID: 435511041}
+  _gameOverPanel: {fileID: 1394642164}
   _gameOverBorderTransform: {fileID: 72109778}
-  _resumeGameCountdownPanel: {fileID: 1867466762}
+  _resumeGameCountdownPanel: {fileID: 1867466758}
   _resumeGameCountdownText: {fileID: 897365576}
   _lastGameTimeText: {fileID: 603055984}
   _yourNewBestText: {fileID: 54043907}
@@ -4778,13 +4778,14 @@ GameObject:
   - component: {fileID: 1312832208}
   - component: {fileID: 1312832207}
   - component: {fileID: 1312832210}
+  - component: {fileID: 1312832211}
   m_Layer: 5
   m_Name: Tutorial Panel
   m_TagString: PANELS/ Tutorial Panel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1312832206
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4910,10 +4911,22 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1312832205}
   m_Enabled: 1
-  m_Alpha: 0
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1312832211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312832205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1309ffef6b22ad3449a84f3ea8bb3576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1356781566
 GameObject:
   m_ObjectHideFlags: 0
@@ -5147,7 +5160,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1394642165
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5177,9 +5190,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394642164}
   m_Enabled: 1
-  m_Alpha: 0
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!114 &1394642167
 MonoBehaviour:
@@ -5776,7 +5789,7 @@ GameObject:
   - component: {fileID: 1773735854}
   - component: {fileID: 1773735857}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Settings Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6283,7 +6296,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1780252053}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5eb80d8e62d9d145bb50fb783c0f731, type: 3}
   m_Name: 
@@ -6678,7 +6691,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1867466759
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6746,9 +6759,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1867466758}
   m_Enabled: 1
-  m_Alpha: 0
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!1 &1881967105
 GameObject:

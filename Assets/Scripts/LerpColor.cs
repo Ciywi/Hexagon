@@ -1,6 +1,5 @@
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 
 public class LerpColor : MonoBehaviour
 {
@@ -35,8 +34,7 @@ public class LerpColor : MonoBehaviour
 
     #region Awake and Start
 
-    private void Awake()
-    {
+    private void Awake() {
         _colorArrayLength = _lerpColors.Length;
         _gameObjectText = GetComponent<TextMeshProUGUI>();
     }
@@ -44,8 +42,7 @@ public class LerpColor : MonoBehaviour
 
     #region Update
 
-    private void Update()
-    {
+    private void Update() {
         ColorLerp();
     }
 
@@ -53,8 +50,7 @@ public class LerpColor : MonoBehaviour
 
     #region Private Methods
 
-    private void ColorLerp()
-    {
+    private void ColorLerp() {
         _gameObjectText.color = Color.Lerp(_gameObjectText.color, _lerpColors[_colorIndex], _lerpTime * Time.deltaTime);
         _gameObjectText.fontSharedMaterial.SetColor("_GlowColor", Color.Lerp(_gameObjectText.color, _lerpColors[_colorIndex], _lerpTime * Time.deltaTime));
 

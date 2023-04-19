@@ -1,6 +1,5 @@
 using TheraBytes.BetterUi;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Managers
 {
@@ -28,8 +27,7 @@ namespace Managers
 
         #region Awake and Start
 
-        void Awake()
-        {
+        void Awake() {
             if (Instance == null)
             {
                 Instance = this;
@@ -47,8 +45,7 @@ namespace Managers
 
         #region Public Methods
 
-        public void ActivateSettingsCanvasGroup()
-        {
+        public void ActivateSettingsCanvasGroup() {
             _settingsToggle = GameObject.Find("Settings Toggle").GetComponent<BetterToggle>();
             _settingCanvas = GameObject.Find("Settings Panel").GetComponent<CanvasGroup>();
 
@@ -65,8 +62,7 @@ namespace Managers
             _settingCanvas.interactable = _settingsToggle.isOn;
         }
 
-        public void ActivateCanvasGroup(CanvasGroup canvasGroup, bool activate)
-        {
+        public void ActivateCanvasGroup(CanvasGroup canvasGroup, bool activate) {
             if (activate == true)
             {
                 canvasGroup.alpha = 1;
