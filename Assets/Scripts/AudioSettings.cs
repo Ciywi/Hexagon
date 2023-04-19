@@ -1,3 +1,4 @@
+using Nojumpo.ScriptableObjects;
 using System;
 using TheraBytes.BetterUi;
 using UnityEngine;
@@ -10,9 +11,9 @@ public class AudioSettings
     // Change Class Name as Mixer Settings
     #region Serialized Fields
 
-    [SerializeField] private string _volumeName;
+    [SerializeField] private string _exposedMixerName;
     [SerializeField] private AudioMixer _audioMixer;
-    [SerializeField] private BetterSlider _slider;
+    [SerializeField] private FloatVariableSO _volumeAmount;
 
     #endregion
 
@@ -26,9 +27,9 @@ public class AudioSettings
 
     #region Properties
 
-    public string VolumeName { get { return _volumeName; } set { _volumeName = value; } }
+    public string VolumeName { get { return _exposedMixerName; } set { _exposedMixerName = value; } }
     public AudioMixer AudioMixer { get { return _audioMixer; } set { _audioMixer = value; } }
-    public BetterSlider Slider { get { return _slider; } set { _slider = value; } }
+    public FloatVariableSO VolumeAmount { get { return _volumeAmount; } set { _volumeAmount = value; } }
 
     #endregion
 }

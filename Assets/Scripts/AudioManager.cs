@@ -61,9 +61,9 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        GetSavedVolume("Master");
-        GetSavedVolume("Music");
-        GetSavedVolume("SFX");
+        SetMixerVolume("Master");
+        SetMixerVolume("Music");
+        SetMixerVolume("SFX");
         PlayAudio("Menu Music");
     }
 
@@ -116,26 +116,13 @@ public class AudioManager : MonoBehaviour
         audio.SoundSource.pitch += incrementValue;
     }
 
-    public void SetVolume(string mixerName)
+    public void SetMixerVolume(string mixerName)
     {
         AudioSettings audioSettings = Array.Find(_audioSettings, audioSettings => audioSettings.VolumeName == mixerName);
-        //audioSettings.Slider = GameObject.Find(mixerName).GetComponent<BetterSlider>();
 
-        float volume = audioSettings.Slider.value;
+        float volume = audioSettings.VolumeAmount.Value;
 
         audioSettings.AudioMixer.SetFloat(mixerName, Mathf.Log(volume) * 20f);
-
-        PlayerPrefs.SetFloat(mixerName, audioSettings.Slider.value);
-    }
-
-    private void GetSavedVolume(string mixerName)
-    {
-        AudioSettings audioSettings = Array.Find(_audioSettings, audioSettings => audioSettings.VolumeName == mixerName);
-
-        float savedVolume = PlayerPrefs.GetFloat(mixerName, audioSettings.Slider.value);
-        
-        audioSettings.Slider.value = savedVolume;
-        audioSettings.AudioMixer.SetFloat(mixerName, Mathf.Log(savedVolume) * 20f);
     }
 
     #endregion
