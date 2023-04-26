@@ -1,5 +1,4 @@
 using UnityEngine;
-
 namespace Nojumpo
 {
     public class SettingsButton : MonoBehaviour
@@ -8,24 +7,19 @@ namespace Nojumpo
 
 
         // ------------------------- UNITY BUILT-IN METHODS ------------------------
-        private void OnEnable()
-        {
+        private void OnEnable() {
         }
 
-        private void OnDisable()
-        {
+        private void OnDisable() {
         }
 
-        private void Awake()
-        {
+        private void Awake() {
         }
 
-        private void Start()
-        {
+        private void Start() {
         }
 
-        private void Update()
-        {
+        private void Update() {
         }
 
 
@@ -33,8 +27,7 @@ namespace Nojumpo
 
 
         // ------------------------- CUSTOM PUBLIC METHODS -------------------------
-        public void SettingsButton()
-        {
+        public void SettingsButtonClick() {
         }
     }
 }
