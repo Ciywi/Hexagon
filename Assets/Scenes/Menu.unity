@@ -1214,6 +1214,7 @@ GameObject:
   - component: {fileID: 240998188}
   - component: {fileID: 240998187}
   - component: {fileID: 240998191}
+  - component: {fileID: 240998192}
   m_Layer: 5
   m_Name: Settings Toggle
   m_TagString: Untagged
@@ -1289,9 +1290,9 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1218529577}
-        m_TargetAssemblyTypeName: Managers.UIManager, Assembly-CSharp
-        m_MethodName: ActivateSettingsCanvasGroup
+      - m_Target: {fileID: 240998192}
+        m_TargetAssemblyTypeName: Nojumpo.SettingsButton, Assembly-CSharp
+        m_MethodName: SettingsButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1713,6 +1714,19 @@ MonoBehaviour:
             m_StringArgument: PointerDown
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &240998192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240998185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8911420ceb82bbb40b884743342eda59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingsPanel: {fileID: 1061483192}
 --- !u!1 &252471745
 GameObject:
   m_ObjectHideFlags: 0
@@ -7433,6 +7447,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!1 &1061483192 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2696829668593568305, guid: 976171193f8017249889daa3186c13ed, type: 3}
+  m_PrefabInstance: {fileID: 5880292506868746339}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1064879962
 GameObject:
   m_ObjectHideFlags: 0
@@ -14531,6 +14550,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 412715540}
     m_Modifications:
+    - target: {fileID: 2696829668593568301, guid: 976171193f8017249889daa3186c13ed, type: 3}
+      propertyPath: m_Alpha
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2696829668593568301, guid: 976171193f8017249889daa3186c13ed, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2696829668593568301, guid: 976171193f8017249889daa3186c13ed, type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2696829668593568304, guid: 976171193f8017249889daa3186c13ed, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

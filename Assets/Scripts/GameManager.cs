@@ -1,3 +1,4 @@
+using System;
 using Managers;
 using Nojumpo;
 using System.Collections;
@@ -58,6 +59,7 @@ public class GameManager : MonoBehaviour
     private float _startingShrinkSpeed;
 
     #endregion
+    
     #region Serialized Fields
 
     [SerializeField][Range(1.0f, 25.0f)] private float _shrinkSpeed;
@@ -109,8 +111,6 @@ public class GameManager : MonoBehaviour
 
 
     #endregion
-
-
 
     #region Awake and Start
 
