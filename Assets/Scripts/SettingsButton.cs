@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Nojumpo
 {
-    public class SettingsButton : MonoBehaviour
+    public class SettingsButton : ButtonBase
     {
         // -------------------------------- FIELDS ---------------------------------
         [SerializeField]

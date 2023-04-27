@@ -1,11 +1,9 @@
-using System;
+using System.Collections;
 using Managers;
 using Nojumpo;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
 public class GameManager : MonoBehaviour
 {
     #region Instance
@@ -19,11 +17,11 @@ public class GameManager : MonoBehaviour
     [Header("Game Settings")]
     #region Private Fields
 
-    private float _startGameDelay = 0.2f;
+    private const float START_GAME_DELAY = 0.2f;
 
-    private bool _isGameStarted = false;
-    private bool _isGameOver = false;
-    private bool _isPaused = false;
+    private bool _isGameStarted;
+    private bool _isGameOver;
+    private bool _isPaused;
 
     #endregion
 
@@ -43,7 +41,7 @@ public class GameManager : MonoBehaviour
     [Header("Best Time Settings")]
     #region Private Fields
 
-    private float _bestTime = 0.0f;
+    private float _bestTime;
 
     #endregion
 
@@ -68,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     #region Properties
 
-    public float ShrinkSpeed { get { return _shrinkSpeed; } set { _shrinkSpeed = value; } }
+    public float ShrinkSpeed { get { return _shrinkSpeed; } private set { _shrinkSpeed = value; } }
 
     #endregion
 
@@ -90,25 +88,17 @@ public class GameManager : MonoBehaviour
     #region Serialized Fields
 
     private Button _watchAdButton;
-    public int DieCount { get; set; } = 0;
+    public int DieCount { get; set; }
 
     #endregion
 
     [Header("Music Speed Settings")]
     #region Private Fields
 
-    float _musicTime = 0;
+    float _musicTime;
 
     #endregion
-
-    [Header("Color Variables")]
-    #region Private Fields
-
-    private Color _white = Color.white;
-
-    #endregion
-
-
+    
 
     #endregion
 
@@ -162,7 +152,7 @@ public class GameManager : MonoBehaviour
     #region Private Methods
 
     private void SpeedUpTheAudio() {
-        if (_isGameStarted == false || _isPaused == true || _isGameOver == true)
+        if (_isGameStarted == false || _isPaused || _isGameOver)
             return;
 
         _musicTime += Time.deltaTime;
@@ -221,7 +211,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void PlayButton() {
-        Invoke(nameof(LoadScene), _startGameDelay);
+        Invoke(nameof(LoadScene), START_GAME_DELAY);
         AudioManager.Instance.StopAudio("Menu Music");
     }
 

@@ -34,13 +34,7 @@ namespace Managers
         [SerializeField] private Color[] _cantBeUsedTextColor;
         [SerializeField] private List<string> _bannedWords = new List<string>();
         #endregion
-
-        void OnEnable() {
-            SceneManager.sceneLoaded += Login;
-        }
-        void OnDisable() {
-            SceneManager.sceneLoaded -= Login;
-        }
+        
 
         #region Awake
         private void Awake() {
@@ -56,14 +50,13 @@ namespace Managers
         }
 
         private void Start() {
-            // Login();
+            Login();
         }
         #endregion
 
         #region Private Methods
-        private void Login(Scene scene, LoadSceneMode loadSceneMode) {
-
-            _loadingPanel = GameObject.Find("Loading Panel");
+        private void Login() {
+            
             _loadingPanel.SetActive(true);
 
             var request = new LoginWithCustomIDRequest
@@ -80,8 +73,7 @@ namespace Managers
 
         private void OnLoginSuccess(LoginResult result) {
             string name = null;
-            _setUsernamePanel = GameObject.Find("Set Username Panel").GetComponent<CanvasGroup>();
-            
+
             if (result.InfoResultPayload.PlayerProfile != null)
                 name = result.InfoResultPayload.PlayerProfile.DisplayName;
 
@@ -96,7 +88,6 @@ namespace Managers
                 UIManager.Instance.ActivateCanvasGroup(_setUsernamePanel, false);
             }
 
-            // SceneManager.sceneLoaded += CloseLoadingPanel;
             GetLeaderboard();
             Debug.Log($"Successful login/account create");
             Debug.Log($"Welcome Back {name}");
@@ -112,7 +103,6 @@ namespace Managers
         }
 
         private void OnLeaderboardGet(GetLeaderboardResult result) {
-            _scoresPanel = GameObject.Find("Scores Panel").GetComponent<Transform>();
             foreach (Transform item in _scoresPanel)
             {
                 Destroy(item.gameObject);
