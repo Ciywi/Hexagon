@@ -15,7 +15,7 @@ namespace Managers
 
         #endregion
 
-        private GameManager gameManager;
+        private GameManager _gameManager;
 
         private bool _testMode = false;
         private string _androidGameId = "5018066";
@@ -81,14 +81,14 @@ namespace Managers
 
         public void ShowAdvertisement(GameManager gameManager, string bannerID)
         {
-            this.gameManager = gameManager;
+            this._gameManager = gameManager;
 
             Advertisement.Show(bannerID);
         }
 
         public void BannerAdvertisement(GameManager gameManager, string bannerID)
         {
-            this.gameManager = gameManager;
+            this._gameManager = gameManager;
 
             Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
             Advertisement.Banner.Show(bannerID);

@@ -120,7 +120,8 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start() {
-        AdManager.Instance.BannerAdvertisement(this, "bannerAndroid");
+        if (AdManager.Instance != null)
+            AdManager.Instance.BannerAdvertisement(this, "bannerAndroid");
     }
 
     #endregion
@@ -128,7 +129,7 @@ public class GameManager : MonoBehaviour
     private void Update() {
         SpeedUpTheAudio();
 
-#if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN || UNITY_WEBGL
         if (Input.GetKeyDown(KeyCode.Escape) && _isGameOver == false)
         {
             if (_isPaused == false)

@@ -2185,7 +2185,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &481990699
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2195,16 +2195,16 @@ RectTransform:
   m_GameObject: {fileID: 481990698}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1809676, y: 1.1809676, z: 1.1809676}
+  m_LocalScale: {x: 1.2089305, y: 1.2089305, z: 1.2089305}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 72109778}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1.7577778, y: -0.14403528}
-  m_AnchorMax: {x: 0.8621824, y: 0.48005456}
-  m_AnchoredPosition: {x: -549, y: 0}
-  m_SizeDelta: {x: 1148.8492, y: -122.992}
+  m_AnchorMin: {x: 2.096013, y: -0.19649798}
+  m_AnchorMax: {x: 0.847939, y: 0.5325173}
+  m_AnchoredPosition: {x: -667.17004, y: 0}
+  m_SizeDelta: {x: 1436.0615, y: -153.73999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &481990701
 CanvasRenderer:
@@ -4501,6 +4501,8 @@ GameObject:
   - component: {fileID: 1139819097}
   - component: {fileID: 1139819100}
   - component: {fileID: 1139819101}
+  - component: {fileID: 1139819103}
+  - component: {fileID: 1139819102}
   m_Layer: 5
   m_Name: Restart Button
   m_TagString: Untagged
@@ -4515,19 +4517,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1139819095}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0546978, y: 1.0546978, z: 1.0546978}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 72109778}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: -0.0016266345, y: 0.079692006}
-  m_AnchorMax: {x: 0.32418895, y: 0.2795267}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 25}
+  m_SizeDelta: {x: 225, y: 60}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1139819097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4625,9 +4627,9 @@ MonoBehaviour:
       - Name: Normal
         StateObject: Idle
       - Name: Highlighted
-        StateObject: 
+        StateObject: OnHover
       - Name: Pressed
-        StateObject: Click
+        StateObject: OnClick
       - Name: Selected
         StateObject: 
       - Name: Disabled
@@ -4654,7 +4656,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Restart
+  m_text: Retry
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b328aef9cf051894b9990703b3fb8eb3, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 93ac235832b23e042911ce9d1603f099, type: 2}
@@ -4681,10 +4683,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34
-  m_fontSizeBase: 36
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 34
   m_fontSizeMax: 34
   m_fontStyle: 0
@@ -4745,13 +4747,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useRelativeLocations: 1
   locations:
-  - name: Initial
+  - name: Idle
     transformFallback:
-      LocalPosition: {x: -0.000061035156, y: 24.045433, z: 0}
-      AnchoredPosition: {x: 17, y: -3}
+      LocalPosition: {x: 0, y: 15.15033, z: 0}
+      AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: -0.020863183, y: 0.010237217}
-      AnchorMax: {x: -0.020863086, y: 0.010237217}
+      AnchorMin: {x: 0, y: 0}
+      AnchorMax: {x: 0, y: 0}
       Pivot: {x: 0, y: 0}
       Scale: {x: 1, y: 1, z: 1}
       rotation: {x: 0, y: 0, z: 0, w: 1}
@@ -4760,15 +4762,30 @@ MonoBehaviour:
       screenConfigName: 
     transformConfigs:
       items: []
-  - name: Smaller
+  - name: OnHover
     transformFallback:
-      LocalPosition: {x: -0.000061035156, y: 24.045433, z: 0}
-      AnchoredPosition: {x: 17, y: -3}
+      LocalPosition: {x: 0, y: 15.15033, z: 0}
+      AnchoredPosition: {x: 0, y: 0}
       SizeDelta: {x: 0, y: 0}
-      AnchorMin: {x: -0.020863183, y: 0.010237217}
-      AnchorMax: {x: -0.020863086, y: 0.010237217}
+      AnchorMin: {x: 0, y: 0}
+      AnchorMax: {x: 0, y: 0}
       Pivot: {x: 0, y: 0}
-      Scale: {x: 0.9, y: 0.9, z: 0.9}
+      Scale: {x: 1.2, y: 1.2, z: 1.2}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      EulerAngles: {x: 0, y: 0, z: 0}
+      saveRotationAsEuler: 0
+      screenConfigName: 
+    transformConfigs:
+      items: []
+  - name: OnClick
+    transformFallback:
+      LocalPosition: {x: 0, y: 15.15033, z: 0}
+      AnchoredPosition: {x: 0, y: 0}
+      SizeDelta: {x: 0, y: 0}
+      AnchorMin: {x: 0, y: 0}
+      AnchorMax: {x: 0, y: 0}
+      Pivot: {x: 0, y: 0}
+      Scale: {x: 0.8, y: 0.8, z: 1.2}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       EulerAngles: {x: 0, y: 0, z: 0}
       saveRotationAsEuler: 0
@@ -4776,47 +4793,9 @@ MonoBehaviour:
     transformConfigs:
       items: []
   animations:
-  - name: Click
-    from: 
-    to: Smaller
-    curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    actionBeforeStart:
-      m_PersistentCalls:
-        m_Calls: []
-    actionAfterFinish:
-      m_PersistentCalls:
-        m_Calls: []
-    actionOnUpdating:
-      m_PersistentCalls:
-        m_Calls: []
-    animateWithEulerRotation: 0
-    timeScale: 5
   - name: Idle
     from: 
-    to: Initial
+    to: Idle
     curve:
       serializedVersion: 2
       m_Curve:
@@ -4851,7 +4830,83 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     animateWithEulerRotation: 0
-    timeScale: 5
+    timeScale: 6
+  - name: OnClick
+    from: 
+    to: OnClick
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    actionBeforeStart:
+      m_PersistentCalls:
+        m_Calls: []
+    actionAfterFinish:
+      m_PersistentCalls:
+        m_Calls: []
+    actionOnUpdating:
+      m_PersistentCalls:
+        m_Calls: []
+    animateWithEulerRotation: 0
+    timeScale: 6
+  - name: OnHover
+    from: 
+    to: OnHover
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    actionBeforeStart:
+      m_PersistentCalls:
+        m_Calls: []
+    actionAfterFinish:
+      m_PersistentCalls:
+        m_Calls: []
+    actionOnUpdating:
+      m_PersistentCalls:
+        m_Calls: []
+    animateWithEulerRotation: 0
+    timeScale: 6
   startLocation: 
   startUpAnimation: 
   actionOnInit:
@@ -4874,18 +4929,142 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: -8672222855338327019, guid: 0b37cd8b6e62d04428259046a9169218, type: 3}
-          m_TargetAssemblyTypeName: Managers.ButtonManager, Assembly-CSharp
+        - m_Target: {fileID: 1139819102}
+          m_TargetAssemblyTypeName: Nojumpo.ButtonBase, Assembly-CSharp
           m_MethodName: PlayAudio
-          m_Mode: 5
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 8300000, guid: 490d30491b5befd409e4c85697838db9, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: PointerDown
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1139819102}
+          m_TargetAssemblyTypeName: Nojumpo.ButtonBase, Assembly-CSharp
+          m_MethodName: PlayAudio
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: f768f90ee8a46064d8f7539355d1662b, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: PointerDown
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1139819102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139819095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7106dc04ee8187d4cacd8a5f8a696dbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!82 &1139819103
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139819095}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1312832205
 GameObject:
   m_ObjectHideFlags: 0
@@ -4905,7 +5084,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1312832206
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5261,7 +5440,6 @@ GameObject:
   - component: {fileID: 1394642165}
   - component: {fileID: 1394642168}
   - component: {fileID: 1394642167}
-  - component: {fileID: 1394642166}
   m_Layer: 5
   m_Name: Game Over Panel
   m_TagString: Untagged
@@ -5290,18 +5468,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!225 &1394642166
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1394642164}
-  m_Enabled: 0
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!114 &1394642167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7128,7 +7294,6 @@ GameObject:
   - component: {fileID: 1867466759}
   - component: {fileID: 1867466761}
   - component: {fileID: 1867466760}
-  - component: {fileID: 1867466762}
   m_Layer: 5
   m_Name: Countdown Panel
   m_TagString: Untagged
@@ -7195,18 +7360,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1867466758}
   m_CullTransparentMesh: 1
---- !u!225 &1867466762
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1867466758}
-  m_Enabled: 0
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &1881967105
 GameObject:
   m_ObjectHideFlags: 0

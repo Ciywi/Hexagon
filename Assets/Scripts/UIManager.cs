@@ -18,7 +18,7 @@ namespace Managers
         #region Private Fields
 
         private BetterToggle _settingsToggle;
-        private CanvasGroup _settingCanvas;
+        private CanvasGroup _settingsCanvas;
 
         #endregion
 
@@ -47,19 +47,19 @@ namespace Managers
 
         public void ActivateSettingsCanvasGroup() {
             _settingsToggle = GameObject.Find("Settings Toggle").GetComponent<BetterToggle>();
-            _settingCanvas = GameObject.Find("Settings Panel").GetComponent<CanvasGroup>();
+            _settingsCanvas = GameObject.Find("Settings Panel").GetComponent<CanvasGroup>();
 
             if (_settingsToggle.isOn)
             {
-                _settingCanvas.alpha = 1;
+                _settingsCanvas.alpha = 1;
             }
             else
             {
-                _settingCanvas.alpha = 0;
+                _settingsCanvas.alpha = 0;
             }
 
-            _settingCanvas.blocksRaycasts = _settingsToggle.isOn;
-            _settingCanvas.interactable = _settingsToggle.isOn;
+            _settingsCanvas.blocksRaycasts = _settingsToggle.isOn;
+            _settingsCanvas.interactable = _settingsToggle.isOn;
         }
 
         public void ActivateCanvasGroup(CanvasGroup canvasGroup, bool activate) {

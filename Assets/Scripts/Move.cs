@@ -16,7 +16,7 @@ public class Move : MonoBehaviour
 
     #region Private Fields
 
-#if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN || UNITY_WEBGL
     private float _xInput;
 #endif
 
@@ -38,7 +38,7 @@ public class Move : MonoBehaviour
 
     private void FixedUpdate()
     {
-#if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN || UNITY_WEBGL
         RotateAroundObject(ReferenceManager.Instance.CenterHexagon, _xInput, _moveSpeed);
 #endif
 #if UNITY_ANDROID
@@ -53,13 +53,13 @@ public class Move : MonoBehaviour
     private void GetInput()
     {
 
-#if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN || UNITY_WEBGL
         _xInput = Input.GetAxisRaw("Horizontal");
 #endif
 
     }
 
-#if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN ||UNITY_WEBGL
     private void RotateAroundObject(GameObject objectToRotateAround, float xInput, float moveSpeed)
     {
         transform.RotateAround(objectToRotateAround.transform.position, Vector3.forward, xInput * Time.fixedDeltaTime * -moveSpeed);
