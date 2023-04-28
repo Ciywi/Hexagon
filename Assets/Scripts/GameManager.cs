@@ -4,6 +4,7 @@ using Nojumpo;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using MonoBehaviour = UnityEngine.MonoBehaviour;
 public class GameManager : MonoBehaviour
 {
     #region Instance

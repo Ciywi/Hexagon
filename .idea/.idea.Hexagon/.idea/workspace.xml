@@ -28,14 +28,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ButtonBase.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity Game Projects/Hexagon/Assets/Scripts/PlayFabManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity Game Projects/Hexagon/Assets/Scripts/PlayFabManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity Game Projects/Hexagon/Assets/Scripts/PlayFabManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity Game Projects/Hexagon/Assets/Scripts/PlayFabManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity Game Projects/Hexagon/Assets/Scripts/PlayFabManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity Game Projects/Hexagon/Assets/Scripts/PlayFabManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity Game Projects/Hexagon/Assets/Scripts/PlayFabManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Unity Game Projects/Hexagon/Assets/Scripts/PlayFabManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ScoreManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/SettingsButton.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -124,7 +117,7 @@
       <workItem from="1682686131168" duration="518000" />
       <workItem from="1682700976021" duration="90000" />
       <workItem from="1682702141730" duration="606000" />
-      <workItem from="1682703440356" duration="881000" />
+      <workItem from="1682703440356" duration="3638000" />
     </task>
     <servers />
   </component>
